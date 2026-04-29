@@ -11,6 +11,8 @@
   --amber:#E67E22;--amber-light:#FEF5EC;--amber-mid:#FAD7A0;
   --blue:#2471A3;--blue-light:#EBF5FB;--blue-mid:#A9CCE3;
   --green:#1E8449;--green-light:#EAFAF1;--green-mid:#A9DFBF;
+  --purple:#7D3C98;--purple-light:#F5EEF8;--purple-mid:#D2B4DE;
+  --orange:#D35400;--orange-light:#FBEEE6;--orange-mid:#F0B27A;
   --bg:#F4F6F8;--surface:#FFFFFF;--surface2:#F8F9FA;
   --border:#E0E4E8;--border2:#C8CDD4;
   --text:#1A1D23;--text2:#4A5568;--text3:#8898AA;
@@ -19,10 +21,7 @@
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html{font-size:16px}
 body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;padding:16px}
-
 .wrap{max-width:680px;margin:0 auto}
-
-/* BRAND */
 .brand{text-align:center;padding:24px 0 20px}
 .brand-badge{display:inline-flex;align-items:center;gap:8px;background:var(--red);color:#fff;padding:6px 16px;border-radius:100px;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:0.08em;margin-bottom:14px}
 .brand-dot{width:8px;height:8px;background:#fff;border-radius:50%;animation:pulse 1.5s infinite}
@@ -30,15 +29,11 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 .brand-title{font-family:'Space Mono',monospace;font-size:clamp(26px,5vw,40px);font-weight:700;color:var(--text);letter-spacing:-0.02em;line-height:1.1;margin-bottom:6px}
 .brand-title span{color:var(--red)}
 .brand-sub{font-size:14px;color:var(--text3);font-weight:400}
-
-/* STATUS BAR */
-.status-bar{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;box-shadow:var(--shadow)}
-.status-left{display:flex;flex-direction:column;gap:2px}
-.status-role{font-size:13px;font-weight:600;color:var(--text)}
-.status-scenario{font-size:12px;color:var(--text3)}
-.status-clock{font-family:'Space Mono',monospace;font-size:22px;font-weight:700;color:var(--red)}
-
-/* GAUGES */
+.status-bar{background:var(--text);border-radius:14px;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;box-shadow:var(--shadow-lg)}
+.status-left{display:flex;flex-direction:column;gap:4px}
+.status-role{font-size:15px;font-weight:700;color:#fff;font-family:'Space Mono',monospace;letter-spacing:0.02em}
+.status-scenario{font-size:11px;color:#8898AA;font-family:'Space Mono',monospace;letter-spacing:0.04em}
+.status-clock{font-family:'Space Mono',monospace;font-size:28px;font-weight:700;color:#E74C3C;letter-spacing:0.05em}
 .gauges{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:14px}
 @media(min-width:500px){.gauges{grid-template-columns:repeat(4,1fr)}}
 .gauge{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px;box-shadow:var(--shadow)}
@@ -46,8 +41,6 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 .gauge-val{font-family:'Space Mono',monospace;font-size:24px;font-weight:700;color:var(--text);margin-bottom:8px}
 .gauge-track{height:5px;background:var(--border);border-radius:3px}
 .gauge-fill{height:5px;border-radius:3px;transition:width 0.6s ease}
-
-/* LOG */
 .log{background:var(--text);border-radius:12px;padding:16px;margin-bottom:14px;min-height:100px;max-height:140px;overflow-y:auto;box-shadow:var(--shadow-lg)}
 .log::-webkit-scrollbar{width:3px}
 .log::-webkit-scrollbar-thumb{background:#444;border-radius:2px}
@@ -56,29 +49,25 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 .log-line.warn{color:#F39C12}
 .log-line.ok{color:#27AE60}
 .log-line.info{color:#3498DB}
-
-/* PROGRESS */
 .progress{display:flex;gap:5px;margin-bottom:12px}
 .prog-step{height:5px;flex:1;border-radius:3px;background:var(--border)}
 .prog-step.done{background:var(--blue)}
 .prog-step.current{background:var(--red)}
-
-/* EVENT CARD */
 .event-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:14px;box-shadow:var(--shadow-lg)}
 .event-header{display:flex;align-items:center;gap:10px;margin-bottom:16px}
 .event-tag{font-size:11px;font-weight:700;padding:5px 12px;border-radius:100px;letter-spacing:0.06em;font-family:'Space Mono',monospace}
 .tag-red{background:var(--red-light);color:var(--red);border:1px solid var(--red-mid)}
 .tag-amber{background:var(--amber-light);color:var(--amber);border:1px solid var(--amber-mid)}
 .tag-blue{background:var(--blue-light);color:var(--blue);border:1px solid var(--blue-mid)}
+.tag-purple{background:var(--purple-light);color:var(--purple);border:1px solid var(--purple-mid)}
+.tag-orange{background:var(--orange-light);color:var(--orange);border:1px solid var(--orange-mid)}
 .event-text{font-size:15px;color:var(--text);line-height:1.8;margin-bottom:20px;white-space:pre-line;font-weight:400}
 .choices{display:flex;flex-direction:column;gap:10px}
-.choice-btn{text-align:left;padding:16px 18px;font-size:14px;font-family:'DM Sans',sans-serif;font-weight:500;background:var(--surface2);border:1.5px solid var(--border);border-radius:12px;color:var(--text);cursor:pointer;line-height:1.6;transition:all 0.18s;position:relative}
+.choice-btn{text-align:left;padding:16px 18px;font-size:14px;font-family:'DM Sans',sans-serif;font-weight:500;background:var(--surface2);border:1.5px solid var(--border);border-radius:12px;color:var(--text);cursor:pointer;line-height:1.6;transition:all 0.18s}
 .choice-btn:hover:not(:disabled){background:#fff;border-color:var(--blue);color:var(--text);box-shadow:0 4px 16px rgba(36,113,163,0.12);transform:translateY(-1px)}
 .choice-btn:active:not(:disabled){transform:translateY(0)}
 .choice-btn:disabled{opacity:0.4;cursor:default;transform:none}
 .choice-letter{display:inline-block;width:26px;height:26px;border-radius:8px;background:var(--border);text-align:center;line-height:26px;font-size:12px;font-weight:700;margin-right:10px;font-family:'Space Mono',monospace;vertical-align:middle;flex-shrink:0}
-
-/* ROLE SELECT */
 .section-title{font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px}
 .role-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
 .role-card{background:var(--surface);border:2px solid var(--border);border-radius:16px;padding:20px;cursor:pointer;text-align:left;transition:all 0.18s;box-shadow:var(--shadow)}
@@ -87,16 +76,12 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 .role-icon{font-size:28px;margin-bottom:10px;display:block}
 .role-name{font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px}
 .role-desc{font-size:12px;color:var(--text3);line-height:1.5}
-
-/* SCENARIO SELECT */
 .scen-list{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
 .scen-card{background:var(--surface);border:1.5px solid var(--border);border-radius:14px;padding:18px 20px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;transition:all 0.18s;box-shadow:var(--shadow)}
 .scen-card:hover{border-color:var(--blue);box-shadow:0 6px 20px rgba(36,113,163,0.12);transform:translateY(-1px)}
 .scen-card:active{transform:translateY(0)}
 .scen-name{font-size:15px;font-weight:600;color:var(--text)}
 .scen-sub{font-size:12px;color:var(--text3);margin-top:2px}
-
-/* END */
 .end-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px;box-shadow:var(--shadow-lg)}
 .end-score-wrap{display:flex;align-items:flex-end;gap:8px;margin:16px 0}
 .end-score{font-family:'Space Mono',monospace;font-size:56px;font-weight:700;line-height:1}
@@ -118,31 +103,17 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 .btn.primary:hover{background:#1A5276;border-color:#1A5276;color:#fff}
 .btn-back{background:none;border:none;color:var(--text3);font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;padding:6px 0;margin-bottom:10px;display:flex;align-items:center;gap:4px;font-weight:500}
 .btn-back:hover{color:var(--text)}
-
-/* FEEDBACK FLASH */
-.feedback{padding:12px 16px;border-radius:10px;font-size:13px;font-weight:500;margin-bottom:10px;line-height:1.5;display:none}
-.feedback.show{display:block}
-.feedback.good{background:var(--green-light);color:var(--green);border:1px solid var(--green-mid)}
-.feedback.bad{background:var(--red-light);color:var(--red);border:1px solid var(--red-mid)}
-.feedback.mid{background:var(--amber-light);color:var(--amber);border:1px solid var(--amber-mid)}
-
 .footer{text-align:center;padding:20px 0 8px;font-size:11px;color:var(--text3)}
-
-@media(max-width:420px){
-  .role-grid{grid-template-columns:1fr}
-  .btn-row{flex-direction:column}
-  .btn{width:100%;text-align:center}
-}
+@media(max-width:420px){.role-grid{grid-template-columns:1fr}.btn-row{flex-direction:column}.btn{width:100%;text-align:center}}
 </style>
 </head>
 <body>
 <div class="wrap">
   <div class="brand">
-    <div class="brand-badge"><span class="brand-dot"></span>PROTOTYPE v1</div>
+    <div class="brand-badge"><span class="brand-dot"></span>PROTOTYPE v2</div>
     <div class="brand-title">BLACK<span>BOX</span><br>HOSPITAL</div>
     <div class="brand-sub">Simulateur de crise hospitalière</div>
   </div>
-
   <div class="status-bar">
     <div class="status-left">
       <div class="status-role" id="role-label">Choisissez votre rôle</div>
@@ -150,208 +121,365 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
     </div>
     <div class="status-clock" id="clock">--:--</div>
   </div>
-
   <div id="main-zone"></div>
-
-  <div class="footer">BlackBox Hospital · Prototype 2026 · Tous droits réservés</div>
+  <div class="footer">BlackBox Hospital · Prototype 2026 · Basé sur procédures HCL réelles</div>
 </div>
-
 <script>
-const G={role:null,scenario:null,reseau:80,patients:90,moral:70,pression:35,heure:4,minute:17,step:0};
+const G={role:null,scenario:null,j1:80,j2:90,j3:70,j4:35,heure:4,minute:17,step:0};
 let currentSteps=[],selectedChoices=[];
 
 const ROLES={
   dsi:{name:'DSI',icon:'💻',desc:'Directeur des systèmes d\'information. Décisions techniques et arbitrages sous pression.'},
-  ide:{name:'Infirmière coordinatrice',icon:'🩺',desc:'Coordination soins aux urgences. Gestion des humains et des flux en situation critique.'}
+  ide:{name:'Infirmière coordinatrice',icon:'🩺',desc:'Coordination soins aux urgences. Gestion des humains et des flux en situation critique.'},
+  cadre:{name:'Cadre de santé (nuit)',icon:'🌙',desc:'Garde de nuit — vous supervisez plusieurs unités. Seul décideur terrain entre minuit et 6h.'},
+  dpo:{name:'DPO / Conformité RGPD',icon:'🔒',desc:'Responsable protection des données. Violation détectée — CNIL à notifier sous 72h.'},
+  brancardier:{name:'Régulateur STIP',icon:'🚑',desc:'Coordination du brancardage. Panne du logiciel PTAH — 14 transports patients à gérer sur papier.'}
 };
+
+function mkS(tag,tc,txt,cs){return{tag,tagClass:tc,text:txt,choices:cs};}
+function mkC(l,e,log,q,qi){return{l,e,log,q,qi};}
 
 const SCENARIOS={
   ransomware:{
     name:'Cyberattaque ransomware',sub:'Chiffrement des serveurs — nuit',tag:'CRITIQUE',tagClass:'tag-red',
-    startLog:[
-      {t:'alert',m:'ALERTE — Chiffrement détecté sur 3 serveurs principaux.'},
-      {t:'warn',m:'DossierPatient.exe inaccessible. Bloc opératoire signale panne.'},
-      {t:'info',m:'Vous êtes de garde. Le RSSI ne répond pas.'},
-    ],
+    startLog:[{t:'alert',m:'ALERTE — Chiffrement détecté sur 3 serveurs principaux.'},{t:'warn',m:'DossierPatient.exe inaccessible. Bloc opératoire en panne.'},{t:'info',m:'Vous êtes de garde. Le RSSI ne répond pas.'}],
     gaugeLabels:['Réseau','Patients OK','Moral équipe','Pression DG'],
     steps:{
       dsi:[
-        {tag:'DÉCISION 1/4',tagClass:'tag-red',text:"La directrice des soins appelle :\n«Le bloc opératoire est bloqué — dossiers anesthésiques inaccessibles. 2 interventions dans 45 minutes.»\n\nQue faites-vous en premier ?",
-         choices:[
-           {l:"Couper tout le réseau immédiatement pour stopper la propagation",e:{reseau:+15,patients:-18,moral:-8,pression:+20},log:[{t:'warn',m:'Réseau coupé. Propagation stoppée. Bloc en mode dégradé.'},{t:'alert',m:'2 interventions reportées. Familles informées.'}],q:"Décision radicale mais efficace sur la propagation. Coût humain immédiat.",qi:2},
-           {l:"Isoler uniquement le segment bloc opératoire, maintenir le reste",e:{reseau:-10,patients:-5,moral:+5,pression:+10},log:[{t:'warn',m:'Isolation partielle. Risque propagation présent.'},{t:'info',m:'Bloc partiellement stable. RSSI toujours injoignable.'}],q:"Compromis raisonnable. Risque résiduel réel.",qi:1},
-           {l:"Ne rien couper, chercher d'abord l'origine",e:{reseau:-25,patients:-12,moral:-5,pression:+15},log:[{t:'alert',m:'4 serveurs supplémentaires chiffrés pendant l\'analyse.'},{t:'alert',m:'Biologie et imagerie tombent.'}],q:"Erreur classique : l'analyse prend du temps, l'attaque non.",qi:0},
-         ]},
-        {tag:'DÉCISION 2/4',tagClass:'tag-red',text:"Le SAMU : 3 urgences vitales en route. Communication via logiciel HS.\n\nLe médecin de garde demande si les urgences peuvent recevoir sans informatique.",
-         choices:[
-           {l:"Oui, mode dégradé validé. J'envoie un technicien aux urgences.",e:{reseau:0,patients:+8,moral:+10,pression:-5},log:[{t:'ok',m:'Technicien dépêché. Protocole papier activé.'},{t:'ok',m:'3 patients accueillis avec succès.'}],q:"Bonne décision : vous avez agi dans votre périmètre sans escalader inutilement.",qi:2},
-           {l:"Je rappelle dans 10 minutes, j'attends le point réseau d'abord.",e:{reseau:+5,patients:-15,moral:-12,pression:+25},log:[{t:'alert',m:'SAMU furieux. Délai sur urgences vitales signalé.'},{t:'alert',m:'DG réveillé. Incident noté.'}],q:"La pression technique ne justifie pas de retarder une urgence vitale.",qi:0},
-           {l:"Je contacte le DG pour qu'il prenne la décision.",e:{reseau:0,patients:-5,moral:-8,pression:+30},log:[{t:'warn',m:'DG réveillé à 4h30. Très mécontent.'},{t:'warn',m:'Décision prise avec 8 min de retard.'}],q:"Escalade inutile : cette décision était dans votre périmètre.",qi:0},
-         ]},
-        {tag:'DÉCISION 3/4',tagClass:'tag-amber',text:"Un journaliste tweete : «Source interne : CHU victime cyberattaque majeure. Patients en danger ?»\n\nLe DG vous demande un communiqué immédiatement.",
-         choices:[
-           {l:"Communiqué factuel : incident en cours, situation maîtrisée, aucun patient en danger",e:{reseau:0,patients:+5,moral:+8,pression:-15},log:[{t:'ok',m:'Communiqué publié. Presse stabilisée.'},{t:'ok',m:'Soignants soulagés d\'avoir une communication claire.'}],q:"Transparence factuelle : la bonne posture en crise cyber.",qi:2},
-           {l:"Aucun communiqué avant d'avoir tout sous contrôle.",e:{reseau:0,patients:0,moral:-10,pression:+20},log:[{t:'warn',m:'Silence alimente les rumeurs. 3 médias reprennent le tweet.'},{t:'warn',m:'Personnel inquiet.'}],q:"Le silence en crise est toujours interprété comme un aveu ou une incompétence.",qi:0},
-           {l:"Communiqué vague : «maintenance technique en cours»",e:{reseau:0,patients:0,moral:-5,pression:+10},log:[{t:'alert',m:'Un interne tweete une photo de salles HS.'},{t:'alert',m:'ARS appelle. Communication mensongère retournée contre vous.'}],q:"Minimiser une crise réelle détruit la confiance durablement.",qi:0},
-         ]},
-        {tag:'DÉCISION 4/4',tagClass:'tag-blue',text:"Il est 6h15. Réseau partiellement restauré. L'ANSSI arrive dans 2 heures.\n\nReprise des activités programmées ce matin ou mode dégradé jusqu'à validation ?",
-         choices:[
-           {l:"Mode dégradé jusqu'à validation ANSSI. Sécurité avant tout.",e:{reseau:+10,patients:+5,moral:-5,pression:-10},log:[{t:'ok',m:'Décision prudente validée par l\'ANSSI.'},{t:'ok',m:'5 opérations reportées. Aucun incident supplémentaire.'}],q:"Décision conservatrice mais professionnellement irréprochable.",qi:2},
-           {l:"Reprendre progressivement avec supervision renforcée.",e:{reseau:-5,patients:+10,moral:+10,pression:-5},log:[{t:'warn',m:'2 incidents mineurs détectés et contenus.'},{t:'ok',m:'L\'ANSSI valide la gestion globale.'}],q:"Compromis acceptable si la supervision est vraiment renforcée.",qi:1},
-           {l:"Reprendre normalement. Les équipes ont besoin de revenir à la routine.",e:{reseau:-20,patients:-8,moral:+5,pression:+15},log:[{t:'alert',m:'Rechiffrement partiel détecté à 7h30.'},{t:'alert',m:'L\'ANSSI ouvre une investigation.'}],q:"Erreur grave : la routine ne remplace pas la validation sécurité.",qi:0},
-         ]},
+        mkS('DÉCISION 1/4','tag-red',"La directrice des soins appelle :\n«Bloc opératoire bloqué — dossiers anesthésiques inaccessibles. 2 interventions dans 45 minutes.»\n\nQue faites-vous en premier ?",[
+          mkC("Couper tout le réseau immédiatement pour stopper la propagation",{j1:+15,j2:-18,j3:-8,j4:+20},[{t:'warn',m:'Réseau coupé. Propagation stoppée. Bloc en mode dégradé.'},{t:'alert',m:'2 interventions reportées.'}],"Décision radicale mais efficace. Coût humain immédiat.",2),
+          mkC("Isoler uniquement le segment bloc opératoire",{j1:-10,j2:-5,j3:+5,j4:+10},[{t:'warn',m:'Isolation partielle. Risque propagation présent.'}],"Compromis raisonnable. Risque résiduel réel.",1),
+          mkC("Ne rien couper, chercher d'abord l'origine",{j1:-25,j2:-12,j3:-5,j4:+15},[{t:'alert',m:'4 serveurs supplémentaires chiffrés.'},{t:'alert',m:'Biologie et imagerie tombent.'}],"Erreur classique : l'analyse prend du temps, l'attaque non.",0)
+        ]),
+        mkS('DÉCISION 2/4','tag-red',"SAMU : 3 urgences vitales en route. Communication via logiciel HS.\n\nLe médecin de garde demande si les urgences peuvent recevoir sans informatique.",[
+          mkC("Oui, mode dégradé validé. J'envoie un technicien aux urgences.",{j1:0,j2:+8,j3:+10,j4:-5},[{t:'ok',m:'Protocole papier activé. 3 patients accueillis avec succès.'}],"Bonne décision dans votre périmètre, sans escalade inutile.",2),
+          mkC("Je rappelle dans 10 minutes, j'attends le point réseau.",{j1:+5,j2:-15,j3:-12,j4:+25},[{t:'alert',m:'SAMU furieux. DG réveillé. Incident noté.'}],"La pression technique ne justifie pas de retarder une urgence vitale.",0),
+          mkC("Je contacte le DG pour qu'il prenne la décision.",{j1:0,j2:-5,j3:-8,j4:+30},[{t:'warn',m:'DG réveillé à 4h30. Décision avec 8 min de retard.'}],"Escalade inutile : cette décision était dans votre périmètre.",0)
+        ]),
+        mkS('DÉCISION 3/4','tag-amber',"Un journaliste tweete : «CHU victime cyberattaque majeure. Patients en danger ?»\n\nLe DG vous demande un communiqué immédiatement.",[
+          mkC("Communiqué factuel : incident en cours, situation maîtrisée, aucun patient en danger",{j1:0,j2:+5,j3:+8,j4:-15},[{t:'ok',m:'Communiqué publié. Presse stabilisée. Soignants rassurés.'}],"Transparence factuelle : la bonne posture en crise cyber.",2),
+          mkC("Aucun communiqué avant d'avoir tout sous contrôle.",{j1:0,j2:0,j3:-10,j4:+20},[{t:'warn',m:'Silence alimente les rumeurs. 3 médias reprennent le tweet.'}],"Le silence en crise est toujours interprété comme un aveu.",0),
+          mkC("Communiqué vague : «maintenance technique en cours»",{j1:0,j2:0,j3:-5,j4:+10},[{t:'alert',m:'Un interne tweete une photo de salles HS. ARS appelle.'}],"Minimiser une crise réelle détruit la confiance durablement.",0)
+        ]),
+        mkS('DÉCISION 4/4','tag-blue',"6h15. Réseau partiellement restauré. ANSSI arrive dans 2 heures.\n\nReprise des activités programmées ou mode dégradé jusqu'à validation ?",[
+          mkC("Mode dégradé jusqu'à validation ANSSI. Sécurité avant tout.",{j1:+10,j2:+5,j3:-5,j4:-10},[{t:'ok',m:'Décision prudente validée par l\'ANSSI. 5 opérations reportées.'}],"Décision conservatrice mais professionnellement irréprochable.",2),
+          mkC("Reprendre progressivement avec supervision renforcée.",{j1:-5,j2:+10,j3:+10,j4:-5},[{t:'warn',m:'2 incidents mineurs contenus. ANSSI valide la gestion.'}],"Compromis acceptable si la supervision est vraiment renforcée.",1),
+          mkC("Reprendre normalement. Les équipes ont besoin de routine.",{j1:-20,j2:-8,j3:+5,j4:+15},[{t:'alert',m:'Rechiffrement partiel à 7h30. ANSSI ouvre une investigation.'}],"Erreur grave : la routine ne remplace pas la validation sécurité.",0)
+        ])
       ],
       ide:[
-        {tag:'DÉCISION 1/4',tagClass:'tag-red',text:"3h du matin. L'informatique vient de couper le réseau sans prévenir.\nPlus d'accès aux dossiers patients. Vous avez 14 patients en charge.\n\nVotre première action ?",
-         choices:[
-           {l:"Imprimer en urgence les dernières ordonnances avant la coupure totale",e:{reseau:0,patients:+12,moral:+8,pression:-5},log:[{t:'ok',m:'Ordonnances imprimées. L\'équipe a les infos clés.'},{t:'ok',m:'Réflexe salué par le médecin de garde.'}],q:"Réflexe terrain excellent : sécuriser les données critiques avant la coupure totale.",qi:2},
-           {l:"Appeler le DSI pour comprendre avant d'agir",e:{reseau:0,patients:-5,moral:-5,pression:+10},log:[{t:'warn',m:'DSI injoignable pendant 8 minutes.'},{t:'warn',m:'2 patients sans suivi.'}],q:"L'attente d'information coûte du temps patient.",qi:1},
-           {l:"Continuer normalement de mémoire, sans les dossiers",e:{reseau:0,patients:-15,moral:-10,pression:+15},log:[{t:'alert',m:'Erreur de dosage évitée de justesse.'},{t:'alert',m:'Incident déclaré. Médecin furieux.'}],q:"Travailler de mémoire sur des patients complexes est une prise de risque inacceptable.",qi:0},
-         ]},
-        {tag:'DÉCISION 2/4',tagClass:'tag-red',text:"4h15. Un patient agité sort dans le couloir en criant que l'hôpital est «piraté par des terroristes».\nIl a appris la cyberattaque par sa famille via WhatsApp.\n\nVous gérez comment ?",
-         choices:[
-           {l:"Lui expliquer calmement la situation réelle et le raccompagner",e:{reseau:0,patients:+10,moral:+5,pression:-5},log:[{t:'ok',m:'Patient calmé en 6 minutes.'},{t:'ok',m:'L\'équipe vous remercie.'}],q:"La désescalade prend du temps mais évite des incidents en cascade.",qi:2},
-           {l:"Demander à l'aide-soignant de le gérer",e:{reseau:0,patients:-8,moral:-8,pression:+10},log:[{t:'warn',m:'AS débordé. Patient s\'énerve, appelle le 15.'},{t:'warn',m:'Mauvaise pub.'}],q:"Déléguer sans cadrer surcharge l'équipe et aggrave la situation.",qi:0},
-           {l:"Appeler la sécurité immédiatement",e:{reseau:0,patients:-5,moral:-12,pression:+8},log:[{t:'warn',m:'Intervention musclée. Autres patients témoins.'},{t:'alert',m:'Ambiance dans le service se dégrade.'}],q:"Réponse disproportionnée qui traumatise les autres patients et l'équipe.",qi:0},
-         ]},
-        {tag:'DÉCISION 3/4',tagClass:'tag-amber',text:"5h30. Votre collègue IDE craque dans le couloir.\n«Je peux plus. J'ai fait 3 erreurs ce soir, je sais même plus ce que je fais.»\nEncore 2h30 avant la relève.\n\nVous faites quoi ?",
-         choices:[
-           {l:"La mettre en retrait sur les tâches complexes, alerter le cadre de nuit",e:{reseau:0,patients:+8,moral:+12,pression:-8},log:[{t:'ok',m:'Collègue mise en sécurité. Cadre informé.'},{t:'ok',m:'Réorganisation efficace jusqu\'à la relève.'}],q:"Protéger les patients ET la collègue : décision difficile mais professionnelle.",qi:2},
-           {l:"L'encourager, lui dire que ça va aller, continuer ensemble",e:{reseau:0,patients:-10,moral:-5,pression:+5},log:[{t:'warn',m:'4ème erreur à 6h00. Presque un incident grave.'},{t:'warn',m:'La collègue s\'effondre à la relève.'}],q:"L'encouragement ne suffit pas face à une détresse réelle.",qi:1},
-           {l:"La renvoyer chez elle, appeler le cadre pour un remplacement",e:{reseau:0,patients:-5,moral:-15,pression:+12},log:[{t:'alert',m:'Toute l\'équipe témoin. Défiance généralisée.'},{t:'alert',m:'Collègue dépose une main courante le lendemain.'}],q:"Renvoyer sans soutien est perçu comme un abandon. Conséquences RH graves.",qi:0},
-         ]},
-        {tag:'DÉCISION 4/4',tagClass:'tag-blue',text:"7h00. La relève arrive. Le cadre de jour demande un compte-rendu de la nuit.\nVous êtes épuisée. Il y a eu des incidents, des erreurs évitées de justesse.\n\nVous dites quoi ?",
-         choices:[
-           {l:"Compte-rendu complet et honnête : incidents, décisions, état de l'équipe",e:{reseau:0,patients:+10,moral:+15,pression:-10},log:[{t:'ok',m:'Cadre prend les mesures nécessaires.'},{t:'ok',m:'Votre honnêteté protège les patients du jour.'}],q:"La transparence post-crise est la base de l'amélioration continue.",qi:2},
-           {l:"Compte-rendu allégé : «ça a été compliqué mais on a géré»",e:{reseau:0,patients:-5,moral:-5,pression:+5},log:[{t:'warn',m:'Cadre découvre un incident non signalé à 9h.'},{t:'warn',m:'Vous êtes convoquée.'}],q:"Minimiser retarde les mesures correctives nécessaires.",qi:1},
-           {l:"Signaler uniquement les incidents formalisés, rien d'autre",e:{reseau:0,patients:-8,moral:-10,pression:+8},log:[{t:'alert',m:'Patient du matin reçoit un traitement sur infos incomplètes.'},{t:'alert',m:'Incident iatrogène. Enquête interne.'}],q:"Ce qui n'est pas transmis devient un risque pour les patients suivants.",qi:0},
-         ]},
+        mkS('DÉCISION 1/4','tag-red',"3h du matin. Réseau coupé sans prévenir.\nPlus d'accès aux dossiers. 14 patients en charge.\n\nVotre première action ?",[
+          mkC("Imprimer en urgence les dernières ordonnances avant coupure totale",{j1:0,j2:+12,j3:+8,j4:-5},[{t:'ok',m:'Ordonnances imprimées. Réflexe salué par le médecin de garde.'}],"Réflexe terrain excellent : sécuriser les données critiques avant la coupure.",2),
+          mkC("Appeler le DSI pour comprendre avant d'agir",{j1:0,j2:-5,j3:-5,j4:+10},[{t:'warn',m:'DSI injoignable 8 minutes. 2 patients sans suivi.'}],"L'attente d'information coûte du temps patient.",1),
+          mkC("Continuer normalement de mémoire",{j1:0,j2:-15,j3:-10,j4:+15},[{t:'alert',m:'Erreur de dosage évitée de justesse. Incident déclaré.'}],"Travailler de mémoire sur des patients complexes est une prise de risque inacceptable.",0)
+        ]),
+        mkS('DÉCISION 2/4','tag-red',"4h15. Un patient agité sort dans le couloir.\nIl croit que l'hôpital est «piraté par des terroristes» (info WhatsApp).\n\nVous gérez comment ?",[
+          mkC("Lui expliquer calmement la situation réelle et le raccompagner",{j1:0,j2:+10,j3:+5,j4:-5},[{t:'ok',m:'Patient calmé en 6 minutes. L\'équipe vous remercie.'}],"La désescalade prend du temps mais évite des incidents en cascade.",2),
+          mkC("Demander à l'aide-soignant de le gérer",{j1:0,j2:-8,j3:-8,j4:+10},[{t:'warn',m:'AS débordé. Patient s\'énerve, appelle le 15.'}],"Déléguer sans cadrer surcharge l'équipe et aggrave la situation.",0),
+          mkC("Appeler la sécurité immédiatement",{j1:0,j2:-5,j3:-12,j4:+8},[{t:'alert',m:'Intervention musclée. Ambiance dans le service se dégrade.'}],"Réponse disproportionnée qui traumatise les autres patients.",0)
+        ]),
+        mkS('DÉCISION 3/4','tag-amber',"5h30. Votre collègue IDE craque dans le couloir.\n«Je peux plus. J'ai fait 3 erreurs ce soir.»\nEncore 2h30 avant la relève.\n\nVous faites quoi ?",[
+          mkC("La mettre en retrait sur les tâches complexes, alerter le cadre de nuit",{j1:0,j2:+8,j3:+12,j4:-8},[{t:'ok',m:'Collègue mise en sécurité. Réorganisation efficace.'}],"Protéger les patients ET la collègue : décision difficile mais professionnelle.",2),
+          mkC("L'encourager, lui dire que ça va aller",{j1:0,j2:-10,j3:-5,j4:+5},[{t:'warn',m:'4ème erreur à 6h00. Presque un incident grave.'}],"L'encouragement ne suffit pas face à une détresse réelle.",1),
+          mkC("La renvoyer chez elle, appeler le cadre pour un remplacement",{j1:0,j2:-5,j3:-15,j4:+12},[{t:'alert',m:'Toute l\'équipe témoin. Collègue dépose une main courante.'}],"Renvoyer sans soutien est perçu comme un abandon.",0)
+        ]),
+        mkS('DÉCISION 4/4','tag-blue',"7h00. La relève arrive. Compte-rendu de la nuit demandé.\nVous êtes épuisée. Incidents et erreurs évitées de justesse.\n\nVous dites quoi ?",[
+          mkC("Compte-rendu complet et honnête",{j1:0,j2:+10,j3:+15,j4:-10},[{t:'ok',m:'Cadre prend les mesures. Votre honnêteté protège les patients du jour.'}],"La transparence post-crise est la base de l'amélioration continue.",2),
+          mkC("Compte-rendu allégé : «ça a été compliqué mais on a géré»",{j1:0,j2:-5,j3:-5,j4:+5},[{t:'warn',m:'Cadre découvre un incident non signalé à 9h. Convocation.'}],"Minimiser retarde les mesures correctives nécessaires.",1),
+          mkC("Signaler uniquement les incidents formalisés",{j1:0,j2:-8,j3:-10,j4:+8},[{t:'alert',m:'Patient du matin reçoit traitement sur infos incomplètes. Enquête.'}],"Ce qui n'est pas transmis devient un risque pour les patients suivants.",0)
+        ])
+      ],
+      cadre:[
+        mkS('DÉCISION 1/4','tag-red',"2h du matin. Le réseau vient de tomber.\nVous supervisez 4 unités avec 8 soignants de garde.\n\nPremière décision ?",[
+          mkC("Activer le PCA : distribuer les formulaires papier à chaque unité, briefer les équipes",{j1:+10,j2:+8,j3:+10,j4:-10},[{t:'ok',m:'PCA activé en 12 minutes. Toutes les unités opérationnelles.'},{t:'ok',m:'Les soignants ont les supports. Situation maîtrisée.'}],"Activer le PCA immédiatement sans attendre la DSI : réflexe parfait de cadre de garde.",2),
+          mkC("Appeler la DSI et attendre leur diagnostic avant d'agir",{j1:0,j2:-10,j3:-8,j4:+15},[{t:'warn',m:'DSI répond en 20 minutes. Pendant ce temps, 3 unités sans protocole.'}],"L'attente sans action en garde de nuit laisse les équipes sans cadre.",0),
+          mkC("Demander à chaque unité de se débrouiller jusqu'au retour du système",{j1:0,j2:-15,j3:-12,j4:+20},[{t:'alert',m:'Pratiques hétérogènes. Un incident dans l\'unité B à 3h15.'}],"Déléguer sans cadre en crise génère des pratiques non sécurisées.",0)
+        ]),
+        mkS('DÉCISION 2/4','tag-red',"3h30. Une aide-soignante vous appelle : elle a trouvé un patient par terre.\nElle ne sait pas s'il a chuté ou s'il a eu un malaise.\n\nVous faites quoi ?",[
+          mkC("Vous déplacez immédiatement, évaluez et activez le numéro d'urgence vitale si besoin",{j1:0,j2:+15,j3:+10,j4:-8},[{t:'ok',m:'Patient stable — chute sans gravité. Déclaration événement indésirable lancée.'}],"Le cadre de nuit doit se déplacer sur tout événement potentiellement grave. Réflexe correct.",2),
+          mkC("Demandez à l'AS de prendre les constantes et de vous rappeler",{j1:0,j2:-8,j3:-5,j4:+10},[{t:'warn',m:'AS pas formée à l\'évaluation neurologique. Délai de 12 minutes.'}],"Déléguer une évaluation urgente à quelqu'un non habilité est une faute.",0),
+          mkC("Appelez le médecin de garde en lui décrivant la situation par téléphone",{j1:0,j2:+5,j3:+3,j4:+5},[{t:'warn',m:'Médecin demande des infos que l\'AS ne peut pas donner. Vous déplacez finalement.'}],"Faire appel au médecin sans évaluation préalable perd du temps.",1)
+        ]),
+        mkS('DÉCISION 3/4','tag-amber',"5h00. Une infirmière vous dit que son collègue sent l'alcool.\nElle hésite à le signaler officiellement. Il reste 2h de garde.\n\nVous gérez comment ?",[
+          mkC("Évaluez vous-même la situation, écartez le soignant du soin si doute confirmé, traçez",{j1:0,j2:+12,j3:+8,j4:-10},[{t:'ok',m:'Soignant écarté. Réorganisation faite. Incident tracé avec tact.'}],"Protection des patients ET du soignant : décision courageuse et professionnelle.",2),
+          mkC("Ne rien faire — 2h, ça va passer, et vous n'avez pas de preuve",{j1:0,j2:-15,j3:-5,j4:+15},[{t:'alert',m:'Incident à 6h00. Erreur médicamenteuse liée. Enquête RH et pénale.'}],"Ne pas agir sur un doute sérieux de sécurité est une faute grave.",0),
+          mkC("Appelez le DRH d'astreinte pour qu'il décide",{j1:0,j2:-5,j3:-5,j4:+10},[{t:'warn',m:'DRH indisponible. Décision repoussée. Risque non géré pendant 45 min.'}],"Le DRH n'est pas la bonne escalade à 5h du matin pour une décision de sécurité immédiate.",1)
+        ]),
+        mkS('DÉCISION 4/4','tag-blue',"6h50. La relève arrive dans 10 minutes.\nNuit chargée : PCA activé, chute patient, incident soignant.\n\nVotre transmission ?",[
+          mkC("Transmission orale et écrite complète : tous les événements, décisions prises, état des équipes",{j1:0,j2:+10,j3:+12,j4:-12},[{t:'ok',m:'Cadre de jour informé de tout. Continuité assurée.'}],"Une transmission exhaustive est la clé de la continuité de soin et de la protection juridique.",2),
+          mkC("Transmission rapide — vous êtes épuisé, les faits principaux suffisent",{j1:0,j2:-8,j3:-5,j4:+8},[{t:'warn',m:'Incident soignant non transmis. Découvert à 10h. Convocation.'}],"La fatigue ne justifie pas une transmission incomplète.",0),
+          mkC("Laisser le cahier de nuit — les faits y sont notés",{j1:0,j2:-5,j3:-3,j4:+5},[{t:'warn',m:'Cadre de jour ne lit pas le cahier avant 8h. Délai d\'information critique.'}],"Le cahier seul ne remplace pas une transmission orale sur les événements graves.",1)
+        ])
+      ],
+      dpo:[
+        mkS('DÉCISION 1/4','tag-purple',"09h00. La DSII détecte une violation sur le logiciel de gestion.\n15 millions de dossiers patients potentiellement exposés.\nLa CNIL doit être notifiée sous 72 heures.\n\nVotre première action ?",[
+          mkC("Lancer une investigation technique pour qualifier précisément la violation avant notification",{j1:+15,j2:0,j3:+5,j4:-5},[{t:'ok',m:'Périmètre réel : 3,2 millions. Notification CNIL avec données précises.'}],"Qualifier avant de notifier est prévu par la procédure RGPD. Une notification inexacte est pire.",2),
+          mkC("Notifier immédiatement la CNIL avec l'estimation haute de 15 millions",{j1:+5,j2:0,j3:-5,j4:-10},[{t:'warn',m:'CNIL notifiée mais chiffre inexact. Correction nécessaire 24h plus tard.'}],"Notifier vite est bien. Notifier avec des données fausses crée un problème de crédibilité.",1),
+          mkC("Attendre d'avoir toutes les informations, même si ça dépasse 72h",{j1:+20,j2:-5,j3:0,j4:+30},[{t:'alert',m:'Investigation complète à H+80. Délai CNIL dépassé. Sanction enclenchée.'}],"Le délai de 72h est une obligation légale RGPD Art.33. Le dépasser expose à des sanctions.",0)
+        ]),
+        mkS('DÉCISION 2/4','tag-purple',"Les soignants apprennent la fuite par un tweet avant toute communication interne.\nCertains agents appellent pour savoir si leurs données sont concernées.\n\nVous faites quoi ?",[
+          mkC("Flash info interne immédiat sur PIXEL : faits connus, faits inconnus, canal dédié",{j1:+5,j2:+5,j3:+15,j4:-10},[{t:'ok',m:'Agents informés. Rumeurs contenues. Syndicats apaisés.'}],"La communication interne avant les médias externes est une priorité absolue.",2),
+          mkC("Ne communiquer en interne qu'après la notification CNIL officielle",{j1:0,j2:-5,j3:-15,j4:+15},[{t:'alert',m:'3 syndicats contactent la direction. Ambiance de défiance.'}],"Les agents ont le droit d'être informés rapidement. Le silence interne est perçu comme un manque de respect.",0),
+          mkC("Envoyer un message rassurant général : «La situation est sous contrôle»",{j1:0,j2:0,j3:+5,j4:-5},[{t:'warn',m:'Un agent tweete que «l\'hôpital minimise». Crise amplifiée.'}],"Rassurer sans informer est de la communication de façade. Contre-productif.",0)
+        ]),
+        mkS('DÉCISION 3/4','tag-purple',"800 000 patients potentiellement concernés.\nLa procédure RGPD prévoit d'informer les patients si risque élevé.\n\nComment organisez-vous la notification ?",[
+          mkC("Segmenter : identifier les patients à risque élevé, courrier recommandé en priorité",{j1:+8,j2:+15,j3:+5,j4:-10},[{t:'ok',m:'45 000 patients à risque élevé identifiés. Courriers sous 5 jours. CNIL valide.'}],"La segmentation par niveau de risque est exactement ce que prévoit la procédure RGPD.",2),
+          mkC("Courrier générique à tous les 800 000 patients simultanément",{j1:-5,j2:+8,j3:-10,j4:+10},[{t:'warn',m:'Standard saturé. Coût postal 400K€. CNIL note le manque de proportionnalité.'}],"La notification de masse non ciblée génère une crise opérationnelle disproportionnée.",1),
+          mkC("Ne pas informer les patients, laisser la CNIL communiquer si elle le juge nécessaire",{j1:0,j2:-15,j3:0,j4:+25},[{t:'alert',m:'CNIL exige la notification directe. Sanction renforcée.'}],"L'obligation d'informer les personnes concernées incombe au responsable de traitement, pas à la CNIL.",0)
+        ]),
+        mkS('DÉCISION 4/4','tag-purple',"Un journaliste prépare un article :\n«HCL : données de 15M patients exposées — la direction savait depuis 48h»\n\nVotre réponse médiatique ?",[
+          mkC("Contacter le journaliste avant publication, proposer une interview factuelle",{j1:0,j2:+5,j3:+8,j4:-15},[{t:'ok',m:'Article publié avec corrections. Titre nuancé. Image préservée.'}],"Le droit de réponse anticipé est la meilleure stratégie médiatique.",2),
+          mkC("Envoyer une mise en demeure juridique pour bloquer la publication",{j1:0,j2:0,j3:-10,j4:+25},[{t:'alert',m:'Journaliste publie + «la direction a tenté de censurer». Crise doublée.'}],"La censure d'un article de presse libre aggrave systématiquement la situation.",0),
+          mkC("Ne pas répondre, laisser l'article sortir",{j1:0,j2:0,j3:-5,j4:+10},[{t:'warn',m:'Article avec erreurs publié sans correction. Démenti impossible après.'}],"Le silence pré-publication est une opportunité manquée de corriger les faits.",1)
+        ])
+      ],
+      brancardier:[
+        mkS('DÉCISION 1/4','tag-orange',"10h30. Le logiciel PTAH tombe.\nLes brancardiers n'ont plus d'ordres sur leurs téléphones.\n14 transports en attente. Le bloc attend un patient depuis 25 min.\n\nVous faites quoi ?",[
+          mkC("Activer la procédure dégradée papier : fiches de transport, tableau blanc, radio interne",{j1:+12,j2:+8,j3:+5,j4:-10},[{t:'ok',m:'Procédure dégradée activée en 8 minutes. Tableau blanc opérationnel.'}],"La procédure dégradée existe pour ça. L'activer immédiatement est le réflexe attendu.",2),
+          mkC("Attendre que la DSI règle le problème informatique",{j1:-15,j2:-20,j3:-10,j4:+25},[{t:'alert',m:'Bloc opératoire attend 40 minutes. Programme décalé.'}],"Un programme opératoire ne peut pas attendre une résolution informatique.",0),
+          mkC("Demander aux services d'appeler directement les brancardiers par téléphone",{j1:+5,j2:-5,j3:-8,j4:+10},[{t:'warn',m:'Saturation des lignes. Doublons. Un patient transporté deux fois.'}],"La coordination téléphonique non centralisée génère des erreurs.",1)
+        ]),
+        mkS('DÉCISION 2/4','tag-orange',"14 transports en attente. 4 brancardiers disponibles.\nBloc attend un patient, dialyse attend 3 patients,\nurgences veulent monter 2 hospitalisations.\n\nVous priorisez comment ?",[
+          mkC("Par urgence médicale : bloc en premier, dialyse ensuite, hospitalisations en dernier",{j1:+10,j2:+15,j3:+8,j4:-15},[{t:'ok',m:'Bloc reçoit son patient en 12 min. Dialyse suivie. Services informés.'}],"La priorisation médicale est le principe fondamental du brancardage en mode dégradé.",2),
+          mkC("Ordre d'arrivée : premier demandé, premier servi",{j1:+5,j2:-15,j3:-5,j4:+15},[{t:'alert',m:'Le bloc attend 55 minutes. Chirurgien annule une intervention.'}],"L'ordre d'arrivée ignore l'urgence médicale. En dégradé, la priorité clinique prime.",0),
+          mkC("Demander aux services de récupérer eux-mêmes leurs patients",{j1:+3,j2:-8,j3:-15,j4:+10},[{t:'alert',m:'Infirmières quittent leur service. 2 événements indésirables liés.'}],"Faire transporter les patients par les soignants désorganise les unités.",0)
+        ]),
+        mkS('DÉCISION 3/4','tag-orange',"Après 1h en mode dégradé, le chef de chirurgie envoie un mail à la direction :\n«Le STIP est incapable de gérer sans informatique.»\n\nVous répondez comment ?",[
+          mkC("Répondre factuellement avec le bilan des transports effectués et le protocole appliqué",{j1:+5,j2:+5,j3:+12,j4:-10},[{t:'ok',m:'Direction valide votre gestion. Chef de chirurgie reçoit les chiffres.'}],"Les données parlent. Répondre avec des faits documentés protège votre équipe.",2),
+          mkC("Ignorer le mail, ce n'est pas le moment de gérer la politique",{j1:0,j2:0,j3:-5,j4:+10},[{t:'warn',m:'La direction reçoit le mail sans réponse. Convocation à 14h.'}],"Ignorer une critique adressée à la direction vous laisse sans défense.",0),
+          mkC("Répondre en expliquant que la panne vient de la DSI",{j1:0,j2:0,j3:-8,j4:+15},[{t:'warn',m:'La DSI répond. Conflit inter-services. Vous perdez.'}],"Blâmer un autre service par écrit à la direction pendant une crise est une erreur.",0)
+        ]),
+        mkS('DÉCISION 4/4','tag-orange',"PTAH revient à 14h30. Mais les transports ont doublé (23 en attente)\net les brancardiers ont noté les demandes différemment sur leurs fiches papier.\n\nComment vous rebranchez ?",[
+          mkC("Réunion de 10 min pour harmoniser les fiches avant de rebasculer sur PTAH",{j1:+15,j2:+10,j3:+8,j4:-12},[{t:'ok',m:'Harmonisation faite. Rebascule propre. Aucun transport perdu.'}],"La transition dégradé → numérique nécessite une vérification. 10 min évitent des heures de problèmes.",2),
+          mkC("Rebasculer immédiatement sur PTAH, les brancardiers feront la saisie au fur et à mesure",{j1:+5,j2:-10,j3:0,j4:+10},[{t:'alert',m:'4 doublons et 2 transports oubliés détectés à 17h.'}],"La précipitation lors de la reprise génère des erreurs de données.",0),
+          mkC("Continuer en mode papier jusqu'au lendemain pour être sûr",{j1:-8,j2:-5,j3:-10,j4:+5},[{t:'warn',m:'Équipe épuisée. 3 brancardiers font des erreurs de surmenage.'}],"Prolonger le mode dégradé au-delà du nécessaire épuise les équipes sans bénéfice.",1)
+        ])
       ]
     }
   },
   greve:{
     name:'Grève surprise aux urgences',sub:'60% du personnel absent',tag:'SOCIAL',tagClass:'tag-amber',
-    startLog:[
-      {t:'warn',m:'06h00 — Préavis de grève déposé hier soir. 60% du personnel absent.'},
-      {t:'alert',m:'Urgences : 4 soignants pour 18 patients en attente.'},
-      {t:'info',m:'DG en réunion de crise. Vous prenez les décisions terrain.'},
-    ],
+    startLog:[{t:'warn',m:'06h00 — Préavis de grève déposé hier soir. 60% du personnel absent.'},{t:'alert',m:'Urgences : 4 soignants pour 18 patients en attente.'},{t:'info',m:'DG en réunion de crise. Vous prenez les décisions terrain.'}],
     gaugeLabels:['Capacité soins','Patients OK','Moral équipe','Tension sociale'],
     steps:{
       dsi:[
-        {tag:'DÉCISION 1/4',tagClass:'tag-amber',text:"La grève bloque l'accès au système de planification RH.\nLe cadre de santé ne peut pas voir les disponibilités des contractuels.\n\nVous proposez quoi ?",
-         choices:[
-           {l:"Ouvrir un accès d'urgence en lecture seule au fichier RH hors réseau",e:{reseau:-5,patients:+10,moral:+8,pression:-10},log:[{t:'ok',m:'Accès RH restauré.'},{t:'ok',m:'8 contractuels mobilisés en 45 minutes.'}],q:"Solution technique pragmatique qui débloque le problème humain rapidement.",qi:2},
-           {l:"Créer un fichier Excel de remplacement partagé sur Teams",e:{reseau:0,patients:+5,moral:+3,pression:-5},log:[{t:'warn',m:'Teams lent. Doublons dans les appels.'},{t:'warn',m:'Perte de temps mais ça fonctionne.'}],q:"Solution de fortune qui fonctionne mais génère du chaos organisationnel.",qi:1},
-           {l:"Ce n'est pas votre périmètre, c'est au RH de gérer",e:{reseau:0,patients:-12,moral:-15,pression:+20},log:[{t:'alert',m:'RH absente (grève). Personne ne gère.'},{t:'alert',m:'Urgences en sous-effectif critique pendant 2h.'}],q:"En crise, les frontières de périmètre sont une erreur de posture.",qi:0},
-         ]},
-        {tag:'DÉCISION 2/4',tagClass:'tag-red',text:"Le syndicat demande une réunion immédiate.\nLe DG est indisponible. Il vous délègue la représentation.\n\nVous acceptez ?",
-         choices:[
-           {l:"Oui, vous écoutez les revendications sans prendre d'engagement",e:{reseau:0,patients:+5,moral:+10,pression:-15},log:[{t:'ok',m:'Dialogue ouvert. Syndicat reconnaît l\'écoute.'},{t:'ok',m:'Quelques grévistes reprennent.'}],q:"Écouter sans promettre : posture difficile mais efficace.",qi:2},
-           {l:"Non, vous n'avez pas le mandat pour représenter la direction",e:{reseau:0,patients:-5,moral:-8,pression:+15},log:[{t:'warn',m:'Syndicat interprète le refus comme du mépris.'},{t:'alert',m:'Préavis étendu à 48h.'}],q:"Refuser le dialogue en crise sociale est toujours interprété comme hostile.",qi:0},
-           {l:"Oui, et vous prenez des engagements pour calmer la situation",e:{reseau:0,patients:+8,moral:+5,pression:-10},log:[{t:'warn',m:'DG découvre les engagements. Furieux.'},{t:'alert',m:'Syndicat se sent trahi. Crise aggravée.'}],q:"Promettre sans mandat crée une crise dans la crise.",qi:0},
-         ]},
-        {tag:'DÉCISION 3/4',tagClass:'tag-amber',text:"Un patient poste en live sur TikTok depuis la salle d'attente.\nLa vidéo fait 12 000 vues en 20 minutes.\n\nVous faites quoi techniquement ?",
-         choices:[
-           {l:"Rien. Vous n'avez pas à interférer avec l'expression d'un patient.",e:{reseau:0,patients:+5,moral:+5,pression:-5},log:[{t:'ok',m:'Vidéo gérée par la communication.'},{t:'ok',m:'Le respect de l\'expression préserve l\'image.'}],q:"Bonne posture : la censure en crise amplifie toujours le problème.",qi:2},
-           {l:"Couper le WiFi de la salle d'attente",e:{reseau:+5,patients:-10,moral:-15,pression:+30},log:[{t:'alert',m:'La coupure filmée. Devient le sujet principal.'},{t:'alert',m:'«L\'hôpital censure» — BFM rappelle.'}],q:"Tenter de censurer un patient est une faute grave de communication de crise.",qi:0},
-           {l:"Alerter la communication pour une réponse rapide",e:{reseau:0,patients:+8,moral:+8,pression:-12},log:[{t:'ok',m:'Message empathique publié en 15 minutes.'},{t:'ok',m:'Vidéo transformée en opportunité positive.'}],q:"Transformer une crise de réputation en empathie : excellent réflexe.",qi:2},
-         ]},
-        {tag:'DÉCISION 4/4',tagClass:'tag-blue',text:"14h00. La grève se lève partiellement. 40% du personnel reprend.\nLe système de planification a des données incohérentes.\n\nVous le remettez en production comment ?",
-         choices:[
-           {l:"Remise en production progressive avec vérification des données critiques d'abord",e:{reseau:+15,patients:+10,moral:+5,pression:-10},log:[{t:'ok',m:'Données validées. Reprise sans incident.'},{t:'ok',m:'Équipe IT saluée pour la rigueur.'}],q:"Rigueur technique post-crise : la remise précipitée crée une seconde crise.",qi:2},
-           {l:"Remise en production immédiate, les équipes en ont besoin maintenant",e:{reseau:-10,patients:-8,moral:+5,pression:+10},log:[{t:'alert',m:'3 doublons de prescription détectés.'},{t:'alert',m:'Système retiré d\'urgence.'}],q:"La rapidité sans vérification est un risque patient direct.",qi:0},
-           {l:"Laisser les équipes en mode papier jusqu'au lendemain",e:{reseau:0,patients:-5,moral:-15,pression:+5},log:[{t:'warn',m:'Équipes épuisées par 8h de papier.'},{t:'alert',m:'2 IDE en arrêt maladie le lendemain.'}],q:"Trop de prudence épuise les équipes terrain.",qi:1},
-         ]},
+        mkS('DÉCISION 1/4','tag-amber',"La grève bloque l'accès au système de planification RH.\nLe cadre ne peut pas voir les disponibilités des contractuels.\n\nVous proposez quoi ?",[
+          mkC("Ouvrir un accès d'urgence en lecture seule au fichier RH hors réseau",{j1:-5,j2:+10,j3:+8,j4:-10},[{t:'ok',m:'Accès RH restauré. 8 contractuels mobilisés en 45 minutes.'}],"Solution technique pragmatique qui débloque le problème humain rapidement.",2),
+          mkC("Créer un fichier Excel de remplacement partagé sur Teams",{j1:0,j2:+5,j3:+3,j4:-5},[{t:'warn',m:'Teams lent. Doublons dans les appels. Ça fonctionne finalement.'}],"Solution de fortune qui fonctionne mais génère du chaos organisationnel.",1),
+          mkC("Ce n'est pas votre périmètre, c'est au RH de gérer",{j1:0,j2:-12,j3:-15,j4:+20},[{t:'alert',m:'RH absente (grève). Urgences en sous-effectif critique pendant 2h.'}],"En crise, les frontières de périmètre sont une erreur de posture.",0)
+        ]),
+        mkS('DÉCISION 2/4','tag-red',"Le syndicat demande une réunion immédiate.\nLe DG est indisponible. Il vous délègue la représentation.\n\nVous acceptez ?",[
+          mkC("Oui, vous écoutez les revendications sans prendre d'engagement",{j1:0,j2:+5,j3:+10,j4:-15},[{t:'ok',m:'Dialogue ouvert. Quelques grévistes reprennent.'}],"Écouter sans promettre : posture difficile mais efficace en représentation de crise.",2),
+          mkC("Non, vous n'avez pas le mandat pour représenter la direction",{j1:0,j2:-5,j3:-8,j4:+15},[{t:'alert',m:'Syndicat interprète le refus comme du mépris. Préavis étendu à 48h.'}],"Refuser le dialogue en crise sociale est toujours interprété comme hostile.",0),
+          mkC("Oui, et vous prenez des engagements pour calmer la situation",{j1:0,j2:+8,j3:+5,j4:-10},[{t:'alert',m:'DG découvre les engagements. Syndicat se sent trahi. Crise aggravée.'}],"Promettre sans mandat crée une crise dans la crise.",0)
+        ]),
+        mkS('DÉCISION 3/4','tag-amber',"Un patient poste en live sur TikTok depuis la salle d'attente.\n12 000 vues en 20 minutes.\n\nVous faites quoi techniquement ?",[
+          mkC("Rien. Vous n'avez pas à interférer avec l'expression d'un patient.",{j1:0,j2:+5,j3:+5,j4:-5},[{t:'ok',m:'Vidéo gérée par la communication institutionnelle.'}],"La censure en crise amplifie toujours le problème.",2),
+          mkC("Couper le WiFi de la salle d'attente",{j1:+5,j2:-10,j3:-15,j4:+30},[{t:'alert',m:'La coupure filmée. «L\'hôpital censure» — BFM rappelle.'}],"Tenter de censurer un patient est une faute grave de communication de crise.",0),
+          mkC("Alerter la communication pour une réponse rapide",{j1:0,j2:+8,j3:+8,j4:-12},[{t:'ok',m:'Message empathique publié en 15 minutes. Vidéo transformée positivement.'}],"Transformer une crise de réputation en empathie : excellent réflexe.",2)
+        ]),
+        mkS('DÉCISION 4/4','tag-blue',"14h. La grève se lève partiellement. Système de planification avec données incohérentes.\n\nVous le remettez en production comment ?",[
+          mkC("Remise progressive avec vérification des données critiques d'abord",{j1:+15,j2:+10,j3:+5,j4:-10},[{t:'ok',m:'Données validées. Reprise sans incident. Équipe IT saluée.'}],"La remise précipitée crée une seconde crise.",2),
+          mkC("Remise immédiate, les équipes en ont besoin maintenant",{j1:-10,j2:-8,j3:+5,j4:+10},[{t:'alert',m:'3 doublons de prescription détectés. Système retiré d\'urgence.'}],"La rapidité sans vérification est un risque patient direct.",0),
+          mkC("Laisser en mode papier jusqu'au lendemain",{j1:0,j2:-5,j3:-15,j4:+5},[{t:'alert',m:'2 IDE en arrêt maladie le lendemain. Burn-out.'}],"Trop de prudence épuise les équipes terrain.",1)
+        ])
       ],
       ide:[
-        {tag:'DÉCISION 1/4',tagClass:'tag-amber',text:"6h15. Vous arrivez à votre poste. 3 collègues sont en grève, 2 appellent malades.\nVous êtes 4 pour gérer 22 patients.\n\nVotre première décision ?",
-         choices:[
-           {l:"Tri immédiat : identifier les 5 patients critiques, déléguer les stables aux AS",e:{reseau:0,patients:+12,moral:+8,pression:-10},log:[{t:'ok',m:'Triage fait en 8 minutes.'},{t:'ok',m:'Médecin de garde : «C\'est exactement ça.»'}],q:"Le triage est la compétence clé en sous-effectif. Réflexe parfait.",qi:2},
-           {l:"Appeler le cadre pour signaler et attendre des instructions",e:{reseau:0,patients:-8,moral:-5,pression:+10},log:[{t:'warn',m:'Cadre met 15 minutes à rappeler.'},{t:'warn',m:'2 patients sans surveillance active.'}],q:"Signaler est bien, attendre sans agir ne l'est pas.",qi:1},
-           {l:"Continuer la tournée habituelle en faisant du mieux possible",e:{reseau:0,patients:-15,moral:-8,pression:+15},log:[{t:'alert',m:'Tournée habituelle = 90 min. Situation hors contrôle.'},{t:'alert',m:'Chute d\'un patient non surveillé.'}],q:"La routine en situation de crise est une erreur.",qi:0},
-         ]},
-        {tag:'DÉCISION 2/4',tagClass:'tag-red',text:"8h30. Un médecin vous demande d'administrer un médicament sans dossier disponible.\nIl dit qu'il «s'en souvient» de la prescription.\n\nVous faites quoi ?",
-         choices:[
-           {l:"Refuser : sans prescription écrite ou vérifiable, vous n'administrez pas",e:{reseau:0,patients:+15,moral:+10,pression:-5},log:[{t:'ok',m:'Médecin rédige la prescription sur papier.'},{t:'ok',m:'Vous avez protégé le patient ET votre responsabilité.'}],q:"Refus courageux et légalement irréprochable. C'est exactement le bon réflexe.",qi:2},
-           {l:"Administrer en faisant confiance au médecin",e:{reseau:0,patients:-18,moral:-8,pression:+10},log:[{t:'alert',m:'Mauvais dosage. Incident iatrogène déclaré.'},{t:'alert',m:'L\'IDE est co-responsable juridiquement.'}],q:"«C'est lui le responsable» est faux juridiquement. L'IDE engage sa propre responsabilité.",qi:0},
-           {l:"Appeler le cadre pour qu'il tranche",e:{reseau:0,patients:-5,moral:-5,pression:+5},log:[{t:'warn',m:'Cadre dit de faire confiance au médecin.'},{t:'warn',m:'Incident évité de justesse.'}],q:"Escalader pour contourner une décision difficile transfère le problème sans le résoudre.",qi:1},
-         ]},
-        {tag:'DÉCISION 3/4',tagClass:'tag-amber',text:"10h00. Un patient refuse les soins.\nSa famille exige qu'il soit pris en charge de force.\n\nVotre position ?",
-         choices:[
-           {l:"Expliquer le droit du patient à la famille, contacter le médecin référent, documenter",e:{reseau:0,patients:+8,moral:+8,pression:-8},log:[{t:'ok',m:'Situation documentée. Famille apaisée.'},{t:'ok',m:'Patient maintenu en surveillance consentie.'}],q:"Combiner respect du droit, communication et documentation : réponse complète.",qi:2},
-           {l:"Céder à la famille pour avoir la paix",e:{reseau:0,patients:-12,moral:-10,pression:+5},log:[{t:'alert',m:'Soins administrés de force sans consentement.'},{t:'alert',m:'Plainte déposée. Enquête éthique ouverte.'}],q:"Céder contre la volonté du patient est une faute éthique et légale grave.",qi:0},
-           {l:"Ignorer la famille, continuer la tournée",e:{reseau:0,patients:-5,moral:-5,pression:+10},log:[{t:'warn',m:'Famille appelle le directeur des soins.'},{t:'warn',m:'Vous êtes convoquée à 14h.'}],q:"Ignorer un conflit patient-famille l'aggrave systématiquement.",qi:0},
-         ]},
-        {tag:'DÉCISION 4/4',tagClass:'tag-blue',text:"12h30. La relève arrive. Vous avez tenu 6h30 en sous-effectif critique.\nLe cadre vous demande : «Vous revenez demain matin ?» Vous avez normalement congé.\n\nVotre réponse ?",
-         choices:[
-           {l:"«Je viens si c'est encore critique, mais je veux être informée ce soir.»",e:{reseau:0,patients:+5,moral:+12,pression:-8},log:[{t:'ok',m:'Engagement conditionnel respecté.'},{t:'ok',m:'Limite saine posée tout en restant solidaire.'}],q:"Solidarité avec limite : la posture la plus durable. Ni martyre ni abandon.",qi:2},
-           {l:"«Oui bien sûr, pas de problème.» sans condition",e:{reseau:0,patients:+8,moral:-15,pression:-5},log:[{t:'warn',m:'Vous dormez 4h.'},{t:'alert',m:'Lendemain : erreur de médication par fatigue.'}],q:"Le sacrifice sans limite détruit les soignants.",qi:0},
-           {l:"«Non. C'est mon congé. Trouvez quelqu'un d'autre.»",e:{reseau:0,patients:-5,moral:+5,pression:+8},log:[{t:'warn',m:'Cadre note le refus. Ambiance tendue.'},{t:'warn',m:'Vous avez le droit. Mais la relation se dégrade.'}],q:"Le droit est entier. La façon de le poser change la relation avec l'équipe.",qi:1},
-         ]},
+        mkS('DÉCISION 1/4','tag-amber',"6h15. 3 collègues en grève, 2 malades.\n4 soignants pour 22 patients.\n\nVotre première décision ?",[
+          mkC("Tri immédiat : identifier les 5 patients critiques, déléguer les stables aux AS",{j1:0,j2:+12,j3:+8,j4:-10},[{t:'ok',m:'Triage en 8 minutes. Médecin de garde : «C\'est exactement ça.»'}],"Le triage est la compétence clé en sous-effectif.",2),
+          mkC("Appeler le cadre pour signaler et attendre des instructions",{j1:0,j2:-8,j3:-5,j4:+10},[{t:'warn',m:'Cadre met 15 minutes. 2 patients sans surveillance.'}],"Signaler est bien, attendre sans agir ne l'est pas.",1),
+          mkC("Continuer la tournée habituelle en faisant du mieux possible",{j1:0,j2:-15,j3:-8,j4:+15},[{t:'alert',m:'Tournée = 90 min. Chute d\'un patient non surveillé.'}],"La routine en situation de crise est une erreur.",0)
+        ]),
+        mkS('DÉCISION 2/4','tag-red',"8h30. Un médecin vous demande d'administrer un médicament sans dossier.\nIl dit qu'il «s'en souvient».\n\nVous faites quoi ?",[
+          mkC("Refuser : sans prescription écrite ou vérifiable, vous n'administrez pas",{j1:0,j2:+15,j3:+10,j4:-5},[{t:'ok',m:'Médecin rédige la prescription. Patient protégé.'}],"Refus courageux et légalement irréprochable.",2),
+          mkC("Administrer en faisant confiance au médecin",{j1:0,j2:-18,j3:-8,j4:+10},[{t:'alert',m:'Mauvais dosage. Incident iatrogène. L\'IDE est co-responsable juridiquement.'}],"«C'est lui le responsable» est faux juridiquement.",0),
+          mkC("Appeler le cadre pour qu'il tranche",{j1:0,j2:-5,j3:-5,j4:+5},[{t:'warn',m:'Cadre dit de faire confiance au médecin. Incident évité de justesse.'}],"Escalader pour contourner une décision difficile transfère le problème.",1)
+        ]),
+        mkS('DÉCISION 3/4','tag-amber',"10h. Un patient refuse les soins.\nSa famille exige une prise en charge de force.\n\nVotre position ?",[
+          mkC("Expliquer le droit du patient à la famille, contacter le médecin référent, documenter",{j1:0,j2:+8,j3:+8,j4:-8},[{t:'ok',m:'Famille apaisée. Patient en surveillance consentie.'}],"Combiner droit, communication et documentation : réponse professionnelle complète.",2),
+          mkC("Céder à la famille pour avoir la paix",{j1:0,j2:-12,j3:-10,j4:+5},[{t:'alert',m:'Soins de force. Plainte déposée. Enquête éthique ouverte.'}],"Céder contre la volonté du patient est une faute éthique et légale grave.",0),
+          mkC("Ignorer la famille, continuer la tournée",{j1:0,j2:-5,j3:-5,j4:+10},[{t:'warn',m:'Famille appelle la direction. Convocation à 14h.'}],"Ignorer un conflit patient-famille l'aggrave systématiquement.",0)
+        ]),
+        mkS('DÉCISION 4/4','tag-blue',"12h30. Relève arrivée. 6h30 en sous-effectif.\nLe cadre demande : «Vous revenez demain matin ?» — C'est votre congé.\n\nVotre réponse ?",[
+          mkC("«Je viens si c'est encore critique, mais je veux être informée ce soir.»",{j1:0,j2:+5,j3:+12,j4:-8},[{t:'ok',m:'Engagement conditionnel respecté. Limite saine posée.'}],"Solidarité avec limite : la posture la plus durable.",2),
+          mkC("«Oui bien sûr, pas de problème.» sans condition",{j1:0,j2:+8,j3:-15,j4:-5},[{t:'alert',m:'4h de sommeil. Erreur de médication par fatigue le lendemain.'}],"Le sacrifice sans limite détruit les soignants.",0),
+          mkC("«Non. C'est mon congé. Trouvez quelqu'un d'autre.»",{j1:0,j2:-5,j3:+5,j4:+8},[{t:'warn',m:'Cadre note le refus. Relation dégradée.'}],"Le droit est entier. La façon de le poser change la relation.",1)
+        ])
+      ],
+      cadre:[
+        mkS('DÉCISION 1/4','tag-amber',"6h30. 60% du personnel absent. Vous coordonnez 3 unités.\nLes contractuels ne sont pas encore arrivés.\n\nVotre première action ?",[
+          mkC("Triage des unités : identifier les 2 patients les plus instables de chaque service",{j1:+10,j2:+12,j3:+8,j4:-10},[{t:'ok',m:'Triage inter-unités fait en 15 minutes. Priorités claires.'}],"La supervision multi-unités en sous-effectif commence par identifier les risques réels.",2),
+          mkC("Appeler le DG pour demander des instructions",{j1:0,j2:-8,j3:-5,j4:+10},[{t:'warn',m:'DG en réunion syndicale. Injoignable 20 minutes.'}],"Le cadre de garde a l'autonomie nécessaire. L'escalade vers le DG n'est pas la bonne première étape.",0),
+          mkC("Rester au poste central et attendre les contractuels",{j1:0,j2:-12,j3:-8,j4:+15},[{t:'alert',m:'Incident dans l\'unité A sans cadre présent. Escalade évitable.'}],"Attendre au poste sans action terrain est une erreur en situation de sous-effectif.",0)
+        ]),
+        mkS('DÉCISION 2/4','tag-red',"9h. Un représentant syndical demande à vous parler.\nIl dit que les conditions de travail actuelles mettent les patients en danger.\nIl veut un engagement écrit avant que ses membres reprennent.\n\nVous répondez quoi ?",[
+          mkC("Écouter, reconnaître la situation difficile, refuser l'engagement écrit sans DG",{j1:0,j2:+5,j3:+10,j4:-10},[{t:'ok',m:'Dialogue constructif. Quelques soignants reprennent après l\'échange.'}],"Écouter sans s'engager au-delà de son mandat : posture cadre irréprochable.",2),
+          mkC("Signer un engagement écrit pour débloquer la situation",{j1:0,j2:+10,j3:+5,j4:-5},[{t:'alert',m:'DG invalide l\'engagement. Syndicat se sent trahi. Crise aggravée.'}],"Signer sans mandat crée une situation pire que le blocage initial.",0),
+          mkC("Refuser tout dialogue, ce n'est pas votre rôle",{j1:0,j2:-8,j3:-10,j4:+15},[{t:'warn',m:'Syndicat interprète le refus comme du mépris. Tension maximale.'}],"Refuser le dialogue en crise sociale est une erreur de posture.",0)
+        ]),
+        mkS('DÉCISION 3/4','tag-amber',"11h. Une infirmière vous dit qu'elle ne peut plus.\nElle a 14 patients seule depuis 5h. Elle pleure dans la réserve.\n\nVous faites quoi ?",[
+          mkC("La mettre en pause 15 minutes, redistribuer ses patients critiques, documenter",{j1:0,j2:+10,j3:+12,j4:-8},[{t:'ok',m:'IDE récupère. Redistribution efficace. Pas d\'incident.'}],"Protéger le soignant en crise protège aussi les patients.",2),
+          mkC("L'encourager et lui promettre que les contractuels arrivent bientôt",{j1:0,j2:-8,j3:-5,j4:+5},[{t:'warn',m:'Contractuels arrivent à 13h. IDE s\'effondre à 12h30.'}],"L'encouragement sans action concrète ne suffit pas.",1),
+          mkC("Lui dire que tout le monde est dans la même situation",{j1:0,j2:-10,j3:-15,j4:+10},[{t:'alert',m:'IDE part en pleurs. Service sans couverture pendant 40 minutes.'}],"Minimiser la détresse d'un soignant en crise est une faute managériale.",0)
+        ]),
+        mkS('DÉCISION 4/4','tag-blue',"14h. La grève se lève. Les équipes sont épuisées.\nLe DG veut une réunion de débriefing immédiate avec tous les cadres.\n\nVous lui dites quoi ?",[
+          mkC("«Donnez 30 minutes aux équipes pour souffler d'abord, puis je serai disponible»",{j1:0,j2:+5,j3:+15,j4:-12},[{t:'ok',m:'DG accepte. Équipes reconnaissantes. Réunion productive à 14h30.'}],"Défendre le temps de récupération de vos équipes est un acte de management courageux.",2),
+          mkC("Venir immédiatement à la réunion, laisser les équipes se débrouiller",{j1:0,j2:-5,j3:-12,j4:-5},[{t:'warn',m:'2 incidents mineurs pendant votre absence. Équipes abandonnées.'}],"La réunion de direction ne doit pas se faire au détriment des équipes terrain.",0),
+          mkC("Envoyer un compte-rendu écrit et ne pas vous déplacer",{j1:0,j2:0,j3:+5,j4:+5},[{t:'warn',m:'DG note votre absence. Votre position dans le débriefing manque de poids.'}],"Le compte-rendu écrit ne remplace pas la présence en réunion de crise.",1)
+        ])
       ]
     }
   },
   facturation:{
     name:'Bug de facturation — 3M€ en jeu',sub:'847 dossiers corrompus',tag:'FINANCIER',tagClass:'tag-blue',
-    startLog:[
-      {t:'warn',m:'08h00 — Anomalies détectées sur 847 dossiers de facturation.'},
-      {t:'alert',m:'Estimation provisoire : 3,2M€ de pertes potentielles sur le T4.'},
-      {t:'info',m:'L\'ARS a été informée. Audit dans 48h.'},
-    ],
+    startLog:[{t:'warn',m:'08h00 — Anomalies sur 847 dossiers de facturation.'},{t:'alert',m:'Estimation : 3,2M€ de pertes potentielles sur le T4.'},{t:'info',m:'ARS informée. Audit dans 48h.'}],
     gaugeLabels:['Données fiables','Patients impactés','Moral équipe','Pression ARS'],
     steps:{
       dsi:[
-        {tag:'DÉCISION 1/4',tagClass:'tag-blue',text:"La comptabilité pense que le bug vient d'une mise à jour du logiciel faite vendredi soir.\nVous n'étiez pas au courant de cette mise à jour.\n\nVotre première action ?",
-         choices:[
-           {l:"Identifier qui a autorisé la mise à jour et comprendre le processus de validation",e:{reseau:+10,patients:+5,moral:+5,pression:-10},log:[{t:'ok',m:'Mise à jour faite sans validation DSI. Processus identifié.'},{t:'ok',m:'Vous avez la réponse pour l\'ARS.'}],q:"Analyser avant d'accuser : réflexe professionnel qui protège tout le monde.",qi:2},
-           {l:"Restaurer immédiatement la version précédente du logiciel",e:{reseau:+5,patients:-8,moral:-5,pression:+5},log:[{t:'warn',m:'Restauration effectuée. Mais les 847 dossiers restent corrompus.'},{t:'warn',m:'Rollback ne résout pas le problème de données.'}],q:"Rollback réflexe : ça arrête le saignement mais ne soigne pas la blessure.",qi:1},
-           {l:"Suspendre toute facturation jusqu'à résolution complète",e:{reseau:0,patients:0,moral:-8,pression:+20},log:[{t:'alert',m:'Trésorerie bloquée.'},{t:'alert',m:'L\'ARS interprète la suspension comme une incapacité.'}],q:"Suspendre tout crée un second problème financier sans résoudre le premier.",qi:0},
-         ]},
-        {tag:'DÉCISION 2/4',tagClass:'tag-blue',text:"847 patients ont été surfacturés ou sous-facturés.\nLa communication veut envoyer un courrier à tous.\nLe juridique veut vérifier chaque dossier un par un.\n\nVous arbitrez comment ?",
-         choices:[
-           {l:"Segmenter : courrier immédiat pour les surfacturés, vérification pour les sous-facturés",e:{reseau:+5,patients:+12,moral:+8,pression:-15},log:[{t:'ok',m:'Les surfacturés remboursés en priorité.'},{t:'ok',m:'L\'ARS salue la priorisation éthique.'}],q:"Prioriser les patients lésés : décision éthique et stratégiquement intelligente.",qi:2},
-           {l:"Attendre la vérification complète avant tout courrier",e:{reseau:+10,patients:-5,moral:-5,pression:+10},log:[{t:'warn',m:'3 patients contactent la presse pendant l\'attente.'},{t:'alert',m:'«L\'hôpital cache une arnaque» — journal local.'}],q:"Le silence côté patient crée un vide que la rumeur comble en négatif.",qi:0},
-           {l:"Laisser le juridique décider seul",e:{reseau:0,patients:-8,moral:-5,pression:+15},log:[{t:'warn',m:'Le juridique prend 5 jours. L\'ARS s\'impatiente.'},{t:'alert',m:'Vous êtes mis hors de la boucle.'}],q:"En crise transversale, s'effacer est une forme d'abandon de poste.",qi:0},
-         ]},
-        {tag:'DÉCISION 3/4',tagClass:'tag-amber',text:"L'éditeur dit que le bug vient d'une mauvaise configuration côté hôpital.\nL'hôpital dit que c'est un bug éditeur.\n\nL'ARS veut une réponse dans 24h. Qui est responsable ?",
-         choices:[
-           {l:"Mandater un audit technique indépendant",e:{reseau:+5,patients:+5,moral:+5,pression:-10},log:[{t:'ok',m:'Audit commandé. L\'ARS accepte le délai.'},{t:'ok',m:'Résultat : responsabilité partagée.'}],q:"L'audit indépendant est le seul moyen crédible de trancher.",qi:2},
-           {l:"Accepter la responsabilité pour clore le sujet rapidement",e:{reseau:0,patients:0,moral:-10,pression:-5},log:[{t:'warn',m:'L\'éditeur refuse toute indemnisation.'},{t:'alert',m:'L\'hôpital supporte seul les 3,2M€.'}],q:"Assumer sans preuve coûte cher financièrement.",qi:0},
-           {l:"Blâmer l'éditeur publiquement",e:{reseau:0,patients:-5,moral:+5,pression:+15},log:[{t:'alert',m:'L\'éditeur contre-attaque avec des preuves.'},{t:'alert',m:'L\'hôpital perd en crédibilité.'}],q:"Blâmer sans preuve se retourne systématiquement contre vous.",qi:0},
-         ]},
-        {tag:'DÉCISION 4/4',tagClass:'tag-blue',text:"L'audit révèle : responsabilité 60% éditeur / 40% hôpital.\nL'éditeur propose un dédommagement de 800K€ sur les 3,2M€.\n\nVotre recommandation au DG ?",
-         choices:[
-           {l:"Accepter les 800K€ et négocier en plus une mise à jour gratuite et un audit de sécurité",e:{reseau:+10,patients:+5,moral:+8,pression:-15},log:[{t:'ok',m:'Accord signé avec conditions supplémentaires.'},{t:'ok',m:'L\'ARS classe le dossier positivement.'}],q:"Négocier au-delà de l'argent : les engagements futurs valent parfois plus.",qi:2},
-           {l:"Refuser et porter l'affaire en justice",e:{reseau:-5,patients:0,moral:-10,pression:+20},log:[{t:'warn',m:'Procédure : 18 mois. Coûts avocat : 150K€.'},{t:'warn',m:'L\'éditeur suspend le support.'}],q:"Le tout-ou-rien judiciaire a un coût réel souvent sous-estimé.",qi:0},
-           {l:"Accepter les 800K€ sans négocier pour en finir",e:{reseau:+5,patients:0,moral:+5,pression:-8},log:[{t:'ok',m:'Dossier clos rapidement.'},{t:'warn',m:'Processus non revu. Même bug possible dans 6 mois.'}],q:"Clore vite sans corriger le fond : le prochain incident sera plus difficile à justifier.",qi:1},
-         ]},
+        mkS('DÉCISION 1/4','tag-blue',"La comptabilité pense que le bug vient d'une mise à jour faite vendredi soir.\nVous n'étiez pas au courant.\n\nVotre première action ?",[
+          mkC("Identifier qui a autorisé la mise à jour et comprendre le processus de validation",{j1:+10,j2:+5,j3:+5,j4:-10},[{t:'ok',m:'Mise à jour sans validation DSI. Faille de processus identifiée.'}],"Analyser avant d'accuser : réflexe professionnel qui protège tout le monde.",2),
+          mkC("Restaurer immédiatement la version précédente du logiciel",{j1:+5,j2:-8,j3:-5,j4:+5},[{t:'warn',m:'Restauration faite. Mais les 847 dossiers restent corrompus.'}],"Rollback réflexe : ça arrête le saignement mais ne soigne pas la blessure.",1),
+          mkC("Suspendre toute facturation jusqu'à résolution complète",{j1:0,j2:0,j3:-8,j4:+20},[{t:'alert',m:'Trésorerie bloquée. ARS interprète la suspension comme une incapacité.'}],"Suspendre tout crée un second problème financier.",0)
+        ]),
+        mkS('DÉCISION 2/4','tag-blue',"847 patients surfacturés ou sous-facturés.\nCommunication veut envoyer un courrier à tous.\nJuridique veut vérifier chaque dossier un par un.\n\nVous arbitrez comment ?",[
+          mkC("Segmenter : courrier immédiat pour les surfacturés, vérification pour les sous-facturés",{j1:+5,j2:+12,j3:+8,j4:-15},[{t:'ok',m:'Surfacturés remboursés en priorité. ARS salue la priorisation éthique.'}],"Prioriser les patients lésés : décision éthique et stratégiquement intelligente.",2),
+          mkC("Attendre la vérification complète avant tout courrier",{j1:+10,j2:-5,j3:-5,j4:+10},[{t:'alert',m:'3 patients contactent la presse. «L\'hôpital cache une arnaque».'}],"Le silence côté patient crée un vide que la rumeur comble en négatif.",0),
+          mkC("Laisser le juridique décider seul",{j1:0,j2:-8,j3:-5,j4:+15},[{t:'alert',m:'Juridique prend 5 jours. Vous êtes mis hors de la boucle.'}],"En crise transversale, s'effacer est une forme d'abandon de poste.",0)
+        ]),
+        mkS('DÉCISION 3/4','tag-amber',"L'éditeur dit : bug de configuration côté hôpital.\nL'hôpital dit : bug éditeur.\nARS veut une réponse dans 24h.\n\nQui est responsable ?",[
+          mkC("Mandater un audit technique indépendant",{j1:+5,j2:+5,j3:+5,j4:-10},[{t:'ok',m:'Audit commandé. ARS accepte. Résultat : responsabilité partagée.'}],"L'audit indépendant est le seul moyen crédible de trancher.",2),
+          mkC("Accepter la responsabilité pour clore le sujet rapidement",{j1:0,j2:0,j3:-10,j4:-5},[{t:'alert',m:'Éditeur refuse toute indemnisation. Hôpital supporte seul les 3,2M€.'}],"Assumer sans preuve coûte cher financièrement.",0),
+          mkC("Blâmer l'éditeur publiquement",{j1:0,j2:-5,j3:+5,j4:+15},[{t:'alert',m:'Éditeur contre-attaque avec des preuves. Hôpital perd en crédibilité.'}],"Blâmer sans preuve se retourne systématiquement contre vous.",0)
+        ]),
+        mkS('DÉCISION 4/4','tag-blue',"Audit : 60% éditeur / 40% hôpital.\nÉditeur propose 800K€ sur les 3,2M€.\n\nVotre recommandation au DG ?",[
+          mkC("Accepter les 800K€ et négocier en plus une mise à jour gratuite et un audit de sécurité",{j1:+10,j2:+5,j3:+8,j4:-15},[{t:'ok',m:'Accord avec conditions supplémentaires. ARS classe le dossier positivement.'}],"Négocier au-delà de l'argent : les engagements futurs valent parfois plus.",2),
+          mkC("Refuser et porter l'affaire en justice pour les 3,2M€",{j1:-5,j2:0,j3:-10,j4:+20},[{t:'warn',m:'Procédure 18 mois. 150K€ d\'avocat. Éditeur suspend le support.'}],"Le tout-ou-rien judiciaire a un coût réel souvent sous-estimé.",0),
+          mkC("Accepter les 800K€ sans négocier pour en finir",{j1:+5,j2:0,j3:+5,j4:-8},[{t:'ok',m:'Dossier clos rapidement.'},{t:'warn',m:'Processus non revu. Même bug possible dans 6 mois.'}],"Clore vite sans corriger le fond : le prochain incident sera plus difficile à justifier.",1)
+        ])
       ],
       ide:[
-        {tag:'DÉCISION 1/4',tagClass:'tag-blue',text:"08h30. Des patients appellent avec des factures incohérentes.\nCertains sont paniqués, l'un menace de porter plainte.\n\nVous gérez les appels comment ?",
-         choices:[
-           {l:"Écouter, reconnaître l'erreur, noter chaque cas, promettre un rappel sous 48h",e:{reseau:0,patients:+12,moral:+8,pression:-10},log:[{t:'ok',m:'23 patients rappelés et apaisés.'},{t:'ok',m:'0 plainte déposée.'}],q:"Écoute + reconnaissance + délai précis : la formule qui transforme une plainte en fidélisation.",qi:2},
-           {l:"Dire que vous n'êtes pas au courant et transférer vers la comptabilité",e:{reseau:0,patients:-8,moral:-5,pression:+10},log:[{t:'warn',m:'Comptabilité débordée, patients en attente 45 min.'},{t:'alert',m:'3 patients appellent la presse.'}],q:"Transférer sans informer abandonne le patient dans l'incertitude.",qi:0},
-           {l:"Nier qu'il y a un problème",e:{reseau:0,patients:-18,moral:-12,pression:+25},log:[{t:'alert',m:'Patients avec preuves deviennent hostiles.'},{t:'alert',m:'2 plaintes ARS dans la journée.'}],q:"Nier une réalité documentée est la pire erreur de gestion de crise.",qi:0},
-         ]},
-        {tag:'DÉCISION 2/4',tagClass:'tag-blue',text:"Un patient âgé arrive au guichet très agité.\nIl a reçu une facture de 4 800€ pour un séjour remboursé à 100%.\nIl n'a pas de mutuelle et ne peut pas payer.\n\nVous faites quoi ?",
-         choices:[
-           {l:"Bloquer la facture en litige, mettre en contact avec l'assistante sociale",e:{reseau:0,patients:+15,moral:+10,pression:-8},log:[{t:'ok',m:'Facture suspendue. Assistante sociale à 10h.'},{t:'ok',m:'Patient repart rassuré.'}],q:"Suspendre + orienter : réponse humaine et procédurale simultanément.",qi:2},
-           {l:"Lui dire de repasser quand la facturation aura réglé le problème",e:{reseau:0,patients:-12,moral:-8,pression:+12},log:[{t:'alert',m:'Patient revient 2h après avec un avocat.'},{t:'alert',m:'Situation escalade.'}],q:"«Repasser plus tard» génère de l'humiliation, pas de la patience.",qi:0},
-           {l:"L'orienter vers la comptabilité",e:{reseau:0,patients:-8,moral:-5,pression:+8},log:[{t:'warn',m:'Comptabilité fermée ce matin.'},{t:'alert',m:'Patient errant dans l\'hôpital pendant 40 minutes.'}],q:"Orienter vers un service fermé sans vérifier, c'est abandonner le patient.",qi:0},
-         ]},
-        {tag:'DÉCISION 3/4',tagClass:'tag-amber',text:"12h00. Votre responsable vous demande de vérifier manuellement 50 dossiers.\nVous avez d'autres tâches urgentes.\n\nVous répondez quoi ?",
-         choices:[
-           {l:"Accepter en demandant une priorisation écrite de vos tâches habituelles",e:{reseau:0,patients:+8,moral:+8,pression:-8},log:[{t:'ok',m:'Priorisation validée par écrit.'},{t:'ok',m:'Responsable apprécie l\'initiative.'}],q:"Accepter en demandant une trace écrite : vous protège et clarifie les responsabilités.",qi:2},
-           {l:"Accepter sans poser de question et gérer les deux en même temps",e:{reseau:0,patients:-5,moral:-12,pression:+5},log:[{t:'warn',m:'Erreurs sur les 2 tâches simultanées.'},{t:'warn',m:'Vous êtes épuisée à 15h.'}],q:"Surcharger sans signaler est une erreur : le responsable ne peut pas arbitrer ce qu'il ignore.",qi:0},
-           {l:"Refuser : ce n'est pas dans vos attributions habituelles",e:{reseau:0,patients:-8,moral:+5,pression:+12},log:[{t:'warn',m:'5 dossiers non traités causent un retard d\'audit.'},{t:'warn',m:'«Manque de flexibilité en crise» noté dans votre éval.'}],q:"Le refus pur sans alternative est possible mais stratégiquement coûteux.",qi:1},
-         ]},
-        {tag:'DÉCISION 4/4',tagClass:'tag-blue',text:"16h30. L'audit révèle que l'erreur venait d'une procédure mal documentée dans votre service.\n\nVotre réaction ?",
-         choices:[
-           {l:"Proposer de rédiger une procédure corrigée avec l'équipe",e:{reseau:0,patients:+5,moral:+15,pression:-12},log:[{t:'ok',m:'Procédure rédigée et validée en 48h.'},{t:'ok',m:'L\'ARS note l\'approche constructive.'}],q:"Transformer l'erreur en amélioration : la posture professionnelle la plus solide.",qi:2},
-           {l:"Se défendre en montrant que d'autres services avaient aussi accès",e:{reseau:0,patients:-5,moral:-10,pression:+10},log:[{t:'warn',m:'Ambiance entre services se détériore.'},{t:'warn',m:'L\'ARS note les tensions comme problème de gouvernance.'}],q:"Se défendre par accusation croisée détériore le collectif.",qi:0},
-           {l:"Ne rien dire et attendre que ça se tasse",e:{reseau:0,patients:0,moral:-8,pression:+5},log:[{t:'warn',m:'«Absence de réponse corrective» mentionnée dans l\'audit.'},{t:'warn',m:'Votre service sous surveillance renforcée 6 mois.'}],q:"L'inaction face à une erreur identifiée est interprétée comme un refus d'apprendre.",qi:0},
-         ]},
+        mkS('DÉCISION 1/4','tag-blue',"08h30. Des patients appellent avec des factures incohérentes.\nCertains paniqués, l'un menace de porter plainte.\n\nVous gérez comment ?",[
+          mkC("Écouter, reconnaître l'erreur, noter chaque cas, promettre un rappel sous 48h",{j1:0,j2:+12,j3:+8,j4:-10},[{t:'ok',m:'23 patients rappelés et apaisés. 0 plainte déposée.'}],"Écoute + reconnaissance + délai précis : la formule qui transforme une plainte en fidélisation.",2),
+          mkC("Dire que vous n'êtes pas au courant et transférer vers la comptabilité",{j1:0,j2:-8,j3:-5,j4:+10},[{t:'alert',m:'Comptabilité débordée. 3 patients appellent la presse.'}],"Transférer sans informer abandonne le patient dans l'incertitude.",0),
+          mkC("Nier qu'il y a un problème",{j1:0,j2:-18,j3:-12,j4:+25},[{t:'alert',m:'Patients avec preuves deviennent hostiles. 2 plaintes ARS.'}],"Nier une réalité documentée est la pire erreur de gestion de crise.",0)
+        ]),
+        mkS('DÉCISION 2/4','tag-blue',"Un patient âgé arrive au guichet très agité.\nFacture de 4 800€ pour un séjour remboursé à 100%.\nPas de mutuelle, ne peut pas payer.\n\nVous faites quoi ?",[
+          mkC("Bloquer la facture en litige, le mettre en contact avec l'assistante sociale",{j1:0,j2:+15,j3:+10,j4:-8},[{t:'ok',m:'Facture suspendue. Patient repart rassuré.'}],"Suspendre + orienter : réponse humaine et procédurale simultanément.",2),
+          mkC("Lui dire de repasser quand la facturation aura réglé le problème",{j1:0,j2:-12,j3:-8,j4:+12},[{t:'alert',m:'Revient 2h après avec un avocat.'}],"«Repasser plus tard» génère de l'humiliation, pas de la patience.",0),
+          mkC("L'orienter vers la comptabilité",{j1:0,j2:-8,j3:-5,j4:+8},[{t:'alert',m:'Comptabilité fermée ce matin. Patient errant 40 minutes.'}],"Orienter vers un service fermé sans vérifier, c'est abandonner le patient.",0)
+        ]),
+        mkS('DÉCISION 3/4','tag-amber',"12h. Votre responsable vous demande de vérifier manuellement 50 dossiers.\nVous avez d'autres tâches urgentes.\n\nVous répondez quoi ?",[
+          mkC("Accepter en demandant une priorisation écrite de vos tâches habituelles",{j1:0,j2:+8,j3:+8,j4:-8},[{t:'ok',m:'Priorisation validée. 50 dossiers traités sans culpabilité.'}],"Accepter en demandant une trace écrite : vous protège et clarifie les responsabilités.",2),
+          mkC("Accepter sans question et gérer les deux en même temps",{j1:0,j2:-5,j3:-12,j4:+5},[{t:'warn',m:'Erreurs sur les 2 tâches. Épuisée à 15h.'}],"Surcharger sans signaler est une erreur.",0),
+          mkC("Refuser : ce n'est pas dans vos attributions",{j1:0,j2:-8,j3:+5,j4:+12},[{t:'warn',m:'«Manque de flexibilité en crise» noté dans votre évaluation.'}],"Le refus pur sans alternative est légalement possible mais stratégiquement coûteux.",1)
+        ]),
+        mkS('DÉCISION 4/4','tag-blue',"L'audit révèle que l'erreur venait d'une procédure mal documentée dans votre service.\n\nVotre réaction ?",[
+          mkC("Proposer de rédiger une procédure corrigée avec l'équipe",{j1:0,j2:+5,j3:+15,j4:-12},[{t:'ok',m:'Procédure rédigée en 48h. ARS note l\'approche constructive.'}],"Transformer l'erreur en amélioration : la posture professionnelle la plus solide.",2),
+          mkC("Se défendre en montrant que d'autres services avaient aussi accès",{j1:0,j2:-5,j3:-10,j4:+10},[{t:'warn',m:'Ambiance entre services se détériore. Tensions internes notées par l\'ARS.'}],"Se défendre par accusation croisée détériore le collectif.",0),
+          mkC("Ne rien dire et attendre que ça se tasse",{j1:0,j2:0,j3:-8,j4:+5},[{t:'warn',m:'«Absence de réponse corrective» dans l\'audit. Surveillance renforcée 6 mois.'}],"L'inaction face à une erreur identifiée est interprétée comme un refus d'apprendre.",0)
+        ])
+      ]
+    }
+  },
+  planblanc:{
+    name:'Déclenchement Plan Blanc',sub:'Afflux massif — 47 blessés annoncés',tag:'PLAN BLANC',tagClass:'tag-red',
+    startLog:[{t:'alert',m:'22h30 — Accident de car sur l\'A7. 47 blessés annoncés.'},{t:'alert',m:'Plan Blanc déclenché. Cellule de crise activée.'},{t:'info',m:'Vous prenez les décisions d\'organisation immédiate.'}],
+    gaugeLabels:['Lits disponibles','Patients pris en charge','Personnel mobilisé','Pression cellule'],
+    steps:{
+      cadre:[
+        mkS('DÉCISION 1/4','tag-red',"La plateforme Fact 24 envoie les SMS de rappel.\nMais des agents ne reconnaissent pas le numéro +33 4 72 11 68 00 et pensent à une arnaque.\nIls ne rappellent pas.\n\nVous faites quoi ?",[
+          mkC("Envoyer immédiatement un message de validation sur le canal interne PIXEL",{j1:+8,j2:0,j3:+15,j4:-10},[{t:'ok',m:'Message PIXEL publié. 80% des rappels confirmés en 20 minutes.'}],"Double confirmation via canal officiel interne : réflexe parfait. Le numéro Fact 24 doit être connu à l'avance.",2),
+          mkC("Attendre que les agents rappellent d'eux-mêmes",{j1:-5,j2:-10,j3:-15,j4:+20},[{t:'alert',m:'45 minutes de retard sur les rappels. Blessés arrivent avant mobilisation.'}],"Le plan blanc repose sur une mobilisation OBLIGATOIRE. L'attente passive est une faute.",0),
+          mkC("Appeler directement les cadres de chaque service pour relayer",{j1:+5,j2:0,j3:+8,j4:+5},[{t:'warn',m:'Saturation des lignes. Le plan blanc dit explicitement de ne pas appeler.'}],"Bonne intention, mauvaise méthode. La procédure Plan Blanc dit : ne pas appeler, attendre le SMS.",1)
+        ]),
+        mkS('DÉCISION 2/4','tag-red',"Des soignants rappelés arrivent sans badge.\nLe vigile bloque l'entrée conformément aux consignes.\n3 infirmières de réanimation bloquées pendant que des patients critiques arrivent.\n\nQue faites-vous ?",[
+          mkC("Autoriser l'entrée temporaire avec pièce d'identité, noter les noms, régulariser après",{j1:+5,j2:+12,j3:+12,j4:-5},[{t:'ok',m:'Infirmières en poste en 3 minutes. Régularisation tracée.'}],"Pragmatisme sécurisé : l'esprit de la procédure avec traçabilité.",2),
+          mkC("Maintenir le blocage strict, la règle badge est sans exception",{j1:0,j2:-12,j3:-12,j4:+25},[{t:'alert',m:'3 patients critiques sans infirmière de réanimation pendant 18 minutes.'}],"La règle existe pour protéger. Mais bloquer les soins critiques est une erreur grave.",0),
+          mkC("Demander à la direction de garde de trancher",{j1:0,j2:-5,j3:-5,j4:+10},[{t:'warn',m:'Direction injoignable 8 minutes. Situation bloquée.'}],"Escalader une décision urgente dans votre périmètre coûte des vies en plan blanc.",0)
+        ]),
+        mkS('DÉCISION 3/4','tag-amber',"12 lits disponibles pour 47 blessés annoncés.\nLe SAMU demande si l'hôpital peut absorber 20 blessés légers supplémentaires.\n\nVotre réponse ?",[
+          mkC("Activer le dépotage : couloirs, salles de réveil, salle de réunion médicalisée",{j1:+18,j2:+10,j3:+5,j4:-10},[{t:'ok',m:'18 espaces supplémentaires créés. Blessés légers orientés hors urgences.'}],"Le plan blanc prévoit la transformation d'espaces. Activer le dépotage est la bonne décision.",2),
+          mkC("Refuser les 20 légers, orienter vers l'établissement voisin",{j1:0,j2:-8,j3:0,j4:-5},[{t:'alert',m:'Établissement voisin saturé. 8 blessés sans prise en charge 40 min.'}],"Orienter sans vérifier la capacité du destinataire est une erreur de coordination.",0),
+          mkC("Accepter tout le monde, trier sur place à l'arrivée",{j1:-5,j2:-12,j3:-12,j4:+20},[{t:'alert',m:'Afflux incontrôlé. Patients critiques en attente de triage.'}],"Accepter sans organisation préalable génère un chaos qui aggrave les outcomes.",0)
+        ]),
+        mkS('DÉCISION 4/4','tag-blue',"BFM appelle. Un journaliste sait qu'un plan blanc est déclenché.\nIl demande un bilan officiel.\n\nVotre réponse ?",[
+          mkC("Transmettre à la cellule de communication institutionnelle, ne rien dire vous-même",{j1:0,j2:0,j3:0,j4:-15},[{t:'ok',m:'Communiqué institutionnel en 20 minutes. Couverture média maîtrisée.'}],"En plan blanc, la communication externe passe EXCLUSIVEMENT par la cellule désignée.",2),
+          mkC("Donner un bilan provisoire pour éviter les rumeurs",{j1:0,j2:-3,j3:-5,j4:+15},[{t:'alert',m:'Bilan inexact. BFM titre «47 morts». Panique.'}],"Un bilan provisoire non validé peut être catastrophique.",0),
+          mkC("Refuser tout contact et raccrocher",{j1:0,j2:0,j3:0,j4:+10},[{t:'warn',m:'BFM tweete «l\'hôpital refuse de communiquer». Ambiguïté maximale.'}],"Rediriger poliment vers la communication institutionnelle plutôt que raccrocher.",1)
+        ])
+      ],
+      dsi:[
+        mkS('DÉCISION 1/4','tag-red',"Plan Blanc déclenché. Le SI doit rester stable pour absorber l'afflux.\nVous recevez 3 alertes techniques simultanées : lenteurs sur Easily, PACS ralenti, messagerie saturée.\n\nQue priorisez-vous ?",[
+          mkC("Prioriser Easily et PACS — les outils cliniques critiques. Messagerie en attente.",{j1:+15,j2:+10,j3:+8,j4:-10},[{t:'ok',m:'Easily stabilisé en 12 minutes. PACS opérationnel. Messagerie dégradée mais acceptable.'}],"En plan blanc, les outils cliniques priment sur les outils de communication interne.",2),
+          mkC("Traiter les trois simultanément avec votre équipe",{j1:+5,j2:-5,j3:-8,j4:+10},[{t:'warn',m:'Équipe dispersée. Aucun problème résolu correctement en 30 minutes.'}],"Disperser les ressources sur plusieurs problèmes simultanés ralentit tout.",0),
+          mkC("Alerter la direction et attendre leurs instructions de priorisation",{j1:0,j2:-8,j3:-5,j4:+15},[{t:'alert',m:'Direction en cellule de crise. Injoignable 20 minutes. Dégradation continue.'}],"La direction de crise ne doit pas arbitrer les priorités techniques — c'est votre rôle.",0)
+        ]),
+        mkS('DÉCISION 2/4','tag-red',"Les urgences demandent l'activation d'un accès exceptionnel pour 15 médecins de renfort\nqui ne sont pas encore dans le système.\n\nVous autorisez comment ?",[
+          mkC("Créer des comptes temporaires sécurisés avec accès limité aux fonctions urgences",{j1:+10,j2:+12,j3:+8,j4:-8},[{t:'ok',m:'15 comptes créés en 18 minutes. Médecins opérationnels.'}],"Accès temporaire limité et sécurisé : la bonne pratique en situation d'exception.",2),
+          mkC("Leur donner les identifiants d'un compte générique existant",{j1:+15,j2:+8,j3:+3,j4:+5},[{t:'warn',m:'Problème de traçabilité. Actions non attribuables. Risque médico-légal.'}],"Le compte générique règle le problème immédiat mais crée un risque de traçabilité grave.",0),
+          mkC("Refuser : créer des comptes hors procédure normale est un risque sécurité",{j1:0,j2:-15,j3:-10,j4:+20},[{t:'alert',m:'15 médecins sans accès SI. Soins en mode papier dégradé pendant 1h.'}],"La sécurité ne doit pas bloquer les soins critiques. La procédure d'exception existe pour ça.",0)
+        ]),
+        mkS('DÉCISION 3/4','tag-amber',"2h après le début du plan blanc, un journaliste publie un document interne\nqui semble avoir fuité depuis votre SI.\n\nVotre réaction ?",[
+          mkC("Lancer immédiatement une analyse des accès pour identifier la source de la fuite",{j1:+10,j2:0,j3:+5,j4:-5},[{t:'ok',m:'Source identifiée : accès depuis un poste non sécurisé. Corrigé.'}],"Identifier la source est la première étape. Sans elle, la fuite peut continuer.",2),
+          mkC("Couper tous les accès externes par précaution",{j1:+5,j2:-12,j3:-10,j4:+15},[{t:'alert',m:'Les médecins de renfort perdent l\'accès. Soins perturbés.'}],"Couper tout par précaution en plan blanc peut perturber les soins critiques.",0),
+          mkC("Ignorer — la priorité c'est le plan blanc, pas la fuite",{j1:0,j2:0,j3:0,j4:+10},[{t:'warn',m:'Fuite continue. 2 autres documents publiés à 1h30.'}],"Une fuite active en plan blanc est un double risque : médiatique et sécurité.",1)
+        ]),
+        mkS('DÉCISION 4/4','tag-blue',"5h du matin. Plan Blanc levé. Bilan : 47 blessés pris en charge, 0 décès évitable.\nVotre SI a tenu. Mais votre équipe est épuisée et vous avez 3 tickets ouverts non résolus.\n\nVotre plan ?",[
+          mkC("Rapport de nuit complet, tickets documentés, demande de renfort pour la journée",{j1:+10,j2:+5,j3:+10,j4:-12},[{t:'ok',m:'Renfort accordé. Tickets traités en journée. Direction satisfaite.'}],"La documentation post-crise protège votre équipe et prépare l'amélioration continue.",2),
+          mkC("Laisser l'équipe de jour gérer, vous avez fait votre part",{j1:-5,j2:-3,j3:+5,j4:+8},[{t:'warn',m:'Équipe de jour découvre les tickets sans contexte. 2h perdues.'}],"Une passation sans documentation laisse l'équipe suivante sans contexte.",0),
+          mkC("Rester sur site pour finir les tickets vous-même",{j1:+5,j2:0,j3:-8,j4:0},[{t:'warn',m:'Vous faites des erreurs par fatigue. Un ticket aggravé.'}],"Continuer à travailler après une nuit de crise génère des erreurs.",1)
+        ])
+      ]
+    }
+  },
+  ptah:{
+    name:'Panne PTAH — brancardage dégradé',sub:'14 transports en attente — logiciel HS',tag:'LOGISTIQUE',tagClass:'tag-orange',
+    startLog:[{t:'alert',m:'10h30 — Le logiciel PTAH tombe. Brancardiers sans ordres.'},{t:'warn',m:'14 transports en attente. Bloc opératoire attend depuis 25 min.'},{t:'info',m:'Source : Procédure dégradée PTAH V2 — HCL Lyon Sud'}],
+    gaugeLabels:['Transports effectués','Bloc opératoire','Moral équipe','Pression services'],
+    steps:{
+      brancardier:[
+        mkS('DÉCISION 1/4','tag-orange',"PTAH tombe. Les brancardiers appellent le STIP : «On fait quoi ?»\nVous êtes régulateur de garde.\n\nVotre réaction ?",[
+          mkC("Activer la procédure dégradée papier : fiches de transport, tableau blanc, radio interne",{j1:+12,j2:+8,j3:+5,j4:-10},[{t:'ok',m:'Procédure dégradée activée en 8 minutes. Tableau blanc opérationnel.'}],"La procédure dégradée existe pour ça. L'activer immédiatement est le réflexe attendu.",2),
+          mkC("Attendre que la DSI règle le problème informatique",{j1:-15,j2:-20,j3:-10,j4:+25},[{t:'alert',m:'Bloc opératoire attend 40 minutes. Programme opératoire décalé.'}],"Un programme opératoire ne peut pas attendre une résolution informatique.",0),
+          mkC("Demander aux services d'appeler directement les brancardiers par téléphone",{j1:+5,j2:-5,j3:-8,j4:+10},[{t:'warn',m:'Saturation des lignes. Doublons. Un patient transporté deux fois, un oublié.'}],"La coordination téléphonique non centralisée génère des erreurs de doublons.",1)
+        ]),
+        mkS('DÉCISION 2/4','tag-orange',"14 transports en attente. 4 brancardiers disponibles.\nBloc attend un patient, dialyse attend 3 patients, urgences veulent monter 2 hospitalisations.\n\nVous priorisez comment ?",[
+          mkC("Par urgence médicale : bloc en premier, dialyse ensuite, hospitalisations en dernier",{j1:+10,j2:+15,j3:+8,j4:-15},[{t:'ok',m:'Bloc reçoit son patient en 12 min. Dialyse suivie. Services informés.'}],"La priorisation médicale est le principe fondamental du brancardage en mode dégradé.",2),
+          mkC("Ordre d'arrivée : premier demandé, premier servi",{j1:+5,j2:-15,j3:-5,j4:+15},[{t:'alert',m:'Le bloc attend 55 minutes. Chirurgien annule une intervention.'}],"L'ordre d'arrivée ignore l'urgence médicale.",0),
+          mkC("Demander aux services de récupérer eux-mêmes leurs patients",{j1:+3,j2:-8,j3:-15,j4:+10},[{t:'alert',m:'Infirmières quittent leur service. 2 événements indésirables liés.'}],"Faire transporter par les soignants désorganise les unités.",0)
+        ]),
+        mkS('DÉCISION 3/4','tag-orange',"Après 1h en mode dégradé, le chef de chirurgie envoie un mail à la direction :\n«Le STIP est incapable de gérer sans informatique.»\n\nVous répondez comment ?",[
+          mkC("Répondre factuellement avec le bilan des transports effectués et le protocole appliqué",{j1:+5,j2:+5,j3:+12,j4:-10},[{t:'ok',m:'Direction valide votre gestion. Tension apaisée.'}],"Les données parlent. Répondre avec des faits documentés protège votre équipe.",2),
+          mkC("Ignorer le mail, ce n'est pas le moment",{j1:0,j2:0,j3:-5,j4:+10},[{t:'warn',m:'Direction reçoit le mail sans réponse. Convocation à 14h.'}],"Ignorer une critique adressée à la direction vous laisse sans défense.",0),
+          mkC("Répondre en blâmant la DSI pour la panne",{j1:0,j2:0,j3:-8,j4:+15},[{t:'warn',m:'La DSI répond. Conflit inter-services. Vous perdez.'}],"Blâmer un autre service par écrit pendant une crise est une erreur.",0)
+        ]),
+        mkS('DÉCISION 4/4','tag-orange',"PTAH revient à 14h30. 23 transports en attente (accumulation).\nLes brancardiers ont noté les demandes différemment sur leurs fiches papier.\n\nComment vous rebranchez ?",[
+          mkC("Réunion de 10 min pour harmoniser les fiches avant de rebasculer sur PTAH",{j1:+15,j2:+10,j3:+8,j4:-12},[{t:'ok',m:'Harmonisation faite. Rebascule propre. Aucun transport perdu.'}],"La transition dégradé → numérique nécessite une vérification. 10 min évitent des heures de problèmes.",2),
+          mkC("Rebasculer immédiatement, les brancardiers feront la saisie au fur et à mesure",{j1:+5,j2:-10,j3:0,j4:+10},[{t:'alert',m:'4 doublons et 2 transports oubliés détectés à 17h.'}],"La précipitation lors de la reprise génère des erreurs de données.",0),
+          mkC("Continuer en mode papier jusqu'au lendemain pour être sûr",{j1:-8,j2:-5,j3:-10,j4:+5},[{t:'warn',m:'Équipe épuisée. 3 brancardiers font des erreurs de surmenage.'}],"Prolonger le mode dégradé au-delà du nécessaire épuise les équipes.",1)
+        ])
+      ],
+      dsi:[
+        mkS('DÉCISION 1/4','tag-orange',"PTAH tombe. Le STIP appelle : ils passent en mode papier.\nMais la DSI reçoit aussi une alerte : la panne vient d'une mise à jour automatique non validée.\n\nVotre première action ?",[
+          mkC("Identifier et stopper la mise à jour automatique, informer le STIP du délai estimé",{j1:+15,j2:+5,j3:+8,j4:-10},[{t:'ok',m:'Source identifiée en 12 minutes. STIP informé : retour PTAH estimé à 3h.'}],"Diagnostiquer rapidement ET communiquer le délai : les deux actions ensemble donnent au STIP ce dont il a besoin.",2),
+          mkC("Travailler sur la résolution sans communiquer pour ne pas créer de fausse attente",{j1:+10,j2:-8,j3:-5,j4:+15},[{t:'warn',m:'STIP en mode papier sans information de délai. Tension monte.'}],"Ne pas communiquer le délai estimé laisse les équipes terrain dans l'incertitude.",0),
+          mkC("Rollback immédiat vers la version précédente de PTAH",{j1:+8,j2:+3,j3:+3,j4:+5},[{t:'warn',m:'Rollback réussi mais données de la matinée potentiellement perdues.'}],"Le rollback réflexe peut entraîner une perte de données si mal préparé.",1)
+        ]),
+        mkS('DÉCISION 2/4','tag-orange',"Le chef de bloc appelle : «J'ai un patient prêt depuis 25 minutes.\nSans transport, j'annule et je facture le temps perdu à votre service.»\n\nVous répondez quoi ?",[
+          mkC("Expliquer la situation, promettre un retour dans 2h, proposer de contacter le STIP directement",{j1:0,j2:+8,j3:+5,j4:-8},[{t:'ok',m:'Chef de bloc comprend. Contacte directement le STIP. Patient transporté en 15 min.'}],"Transparence + orientation vers la bonne personne : communication de crise inter-services efficace.",2),
+          mkC("Lui dire que ce n'est pas votre problème, appelez le STIP",{j1:0,j2:-5,j3:-10,j4:+15},[{t:'warn',m:'Chef de bloc furieux. Mail à la direction. Vous êtes convoqué.'}],"En crise, renvoyer sèchement vers un autre service génère des conflits inutiles.",0),
+          mkC("Promettre que PTAH sera rétabli dans 30 minutes",{j1:0,j2:+3,j3:+3,j4:+5},[{t:'alert',m:'PTAH revient en 3h. Chef de bloc se sent trahi. Escalade à la direction.'}],"Promettre un délai que vous ne maîtrisez pas détruit la confiance.",0)
+        ]),
+        mkS('DÉCISION 3/4','tag-orange',"2h après la panne, le STIP vous demande si vous pouvez développer\nun outil de secours numérique temporaire (type Google Sheet partagé) pour remplacer PTAH.\n\nVotre réponse ?",[
+          mkC("Oui, vous créez un Google Sheet sécurisé et formez le STIP en 20 minutes",{j1:+10,j2:+10,j3:+12,j4:-10},[{t:'ok',m:'Outil déployé. STIP passe du papier au tablette numérique. Efficacité +30%.'}],"Créer un outil temporaire adapté au besoin terrain : initiative DSI exemplaire.",2),
+          mkC("Non, un outil non validé crée des risques de sécurité et de données",{j1:+5,j2:-8,j3:-5,j4:+10},[{t:'warn',m:'STIP continue en mode papier dégradé. Erreurs s\'accumulent.'}],"La sécurité est importante mais ne doit pas bloquer une solution temporaire sans risque patient.",1),
+          mkC("Vous proposez l'outil mais sans formation, ils se débrouillent",{j1:+5,j2:0,j3:-8,j4:+5},[{t:'warn',m:'STIP utilise mal l\'outil. 3 doublons détectés en 1h.'}],"Un outil sans formation génère des erreurs d'utilisation.",0)
+        ]),
+        mkS('DÉCISION 4/4','tag-orange',"PTAH revient. Mais avant de le remettre en production,\nvous détectez que la mise à jour qui a causé la panne s'est aussi installée sur 2 autres logiciels.\n\nVous faites quoi ?",[
+          mkC("Vérifier et corriger les 2 autres logiciels avant toute remise en production",{j1:+15,j2:+8,j3:+5,j4:-10},[{t:'ok',m:'Les 2 logiciels corrigés. Remise en production propre. Aucun incident secondaire.'}],"Corriger la cause racine sur tous les systèmes affectés avant la reprise : rigueur technique parfaite.",2),
+          mkC("Remettre PTAH en production maintenant, corriger les autres plus tard",{j1:+8,j2:-5,j3:+3,j4:+10},[{t:'alert',m:'Un des 2 logiciels tombe à 16h. Deuxième incident dans la journée.'}],"Remettre en production sans corriger les systèmes similaires expose à un second incident.",0),
+          mkC("Alerter la direction et attendre leur validation avant de remettre en production",{j1:+5,j2:-8,j3:0,j4:+5},[{t:'warn',m:'Direction met 40 minutes à valider. STIP attend en mode papier.'}],"La remise en production d'un logiciel opérationnel ne nécessite pas de validation direction.",1)
+        ])
       ]
     }
   }
@@ -362,15 +490,11 @@ function clamp(v){return Math.max(0,Math.min(100,Math.round(v)));}
 function tick(){G.minute+=7;if(G.minute>=60){G.minute-=60;G.heure++;}if(G.heure>=24)G.heure-=24;const el=document.getElementById('clock');if(el)el.textContent=pad(G.heure)+':'+pad(G.minute);}
 
 function updateGauges(){
-  ['reseau','patients','moral','pression'].forEach((k,i)=>{
+  ['j1','j2','j3','j4'].forEach((k,i)=>{
     const gv=document.getElementById('gv-'+i);
     const gf=document.getElementById('gf-'+i);
     if(gv)gv.textContent=clamp(G[k])+'%';
-    if(gf){
-      gf.style.width=clamp(G[k])+'%';
-      const colors=['#C0392B','#1E8449','#E67E22','#2471A3'];
-      gf.style.background=colors[i];
-    }
+    if(gf){gf.style.width=clamp(G[k])+'%';const colors=['#C0392B','#1E8449','#E67E22','#2471A3'];gf.style.background=colors[i];}
   });
 }
 
@@ -407,12 +531,17 @@ function selectRole(key){
   showScenarioSelect();
 }
 
+function getAvailableScenarios(role){
+  return Object.entries(SCENARIOS).filter(([k,s])=>s.steps[role]||s.steps.dsi);
+}
+
 function showScenarioSelect(){
+  const avail=getAvailableScenarios(G.role);
   renderMain(`
     <button class="btn-back" onclick="showRoleSelect()">← Changer de rôle</button>
     <div class="section-title">Choisissez votre scénario</div>
     <div class="scen-list">
-      ${Object.entries(SCENARIOS).map(([k,s])=>`
+      ${avail.map(([k,s])=>`
         <button class="scen-card" onclick="startScenario('${k}')">
           <div>
             <div class="scen-name">${s.name}</div>
@@ -425,12 +554,12 @@ function showScenarioSelect(){
 }
 
 function startScenario(key){
-  G.scenario=key;G.reseau=80;G.patients=90;G.moral=70;G.pression=35;
+  G.scenario=key;G.j1=80;G.j2=90;G.j3=70;G.j4=35;
   G.heure=4;G.minute=17;G.step=0;selectedChoices=[];
   const s=SCENARIOS[key];
-  currentSteps=s.steps[G.role]||s.steps.dsi;
+  currentSteps=s.steps[G.role]||s.steps[Object.keys(s.steps)[0]];
   document.getElementById('scen-label').textContent=s.name;
-  const labels=s.gaugeLabels||['Réseau','Patients OK','Moral équipe','Pression'];
+  const labels=s.gaugeLabels||['J1','J2','J3','J4'];
   renderMain(`
     <div class="gauges">
       ${labels.map((l,i)=>`
@@ -477,22 +606,15 @@ function applyChoice(idx){
 }
 
 function showEnd(){
-  const keys=['reseau','patients','moral','pression'];
+  const keys=['j1','j2','j3','j4'];
   const weights=[0.25,0.35,0.25,0.15];
   let score=0;
-  keys.forEach((k,i)=>{const val=(k==='pression')?100-G[k]:G[k];score+=clamp(val)*weights[i];});
+  keys.forEach((k,i)=>{const val=(i===3)?100-G[k]:G[k];score+=clamp(val)*weights[i];});
   score=Math.round(score);
   let title,color,verdict,borderColor;
-  if(score>=78){
-    title='Crise maîtrisée';color='var(--green)';borderColor='var(--green-mid)';
-    verdict='Vous avez navigué avec lucidité. Vos décisions ont protégé les patients et le collectif. Ce genre de gestionnaire se fait rare.';
-  }else if(score>=55){
-    title='Gestion acceptable — avec séquelles';color='var(--amber)';borderColor='var(--amber-mid)';
-    verdict='L\'hôpital tient. Mais certaines décisions hésitantes ont laissé des traces. Un rapport d\'incident vous attend ce matin.';
-  }else{
-    title='Incident majeur — enquête ouverte';color='var(--red)';borderColor='var(--red-mid)';
-    verdict='La crise a débordé le cadre. Patients impactés, équipe abimée, hiérarchie en colère. Ce n\'est pas la fin — mais c\'est une cicatrice.';
-  }
+  if(score>=78){title='Crise maîtrisée';color='var(--green)';borderColor='var(--green-mid)';verdict='Vous avez navigué avec lucidité. Vos décisions ont protégé les patients et le collectif. Ce genre de gestionnaire se fait rare.';}
+  else if(score>=55){title='Gestion acceptable — avec séquelles';color='var(--amber)';borderColor='var(--amber-mid)';verdict='L\'hôpital tient. Mais certaines décisions hésitantes ont laissé des traces. Un rapport d\'incident vous attend ce matin.';}
+  else{title='Incident majeur — enquête ouverte';color='var(--red)';borderColor='var(--red-mid)';verdict='La crise a débordé le cadre. Patients impactés, équipe abimée, hiérarchie en colère. Ce n\'est pas la fin — mais c\'est une cicatrice.';}
   const qiClass=['bad','mid','good'];
   const debriefs=selectedChoices.map((d,i)=>`
     <div class="debrief-block ${qiClass[d.qi]||'mid'}">
