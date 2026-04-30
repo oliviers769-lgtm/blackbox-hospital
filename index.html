@@ -105,6 +105,22 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 .btn-back:hover{color:var(--text)}
 .footer{text-align:center;padding:20px 0 8px;font-size:11px;color:var(--text3)}
 @media(max-width:420px){.role-grid{grid-template-columns:1fr}.btn-row{flex-direction:column}.btn{width:100%;text-align:center}}
+.ai-zone{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px;margin-top:14px;box-shadow:var(--shadow)}
+.ai-title{font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.ai-dot{width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block;animation:pulse 1.5s infinite}
+.ai-messages{display:flex;flex-direction:column;gap:10px;margin-bottom:14px;max-height:280px;overflow-y:auto}
+.ai-messages::-webkit-scrollbar{width:3px}
+.ai-messages::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+.msg{padding:12px 14px;border-radius:12px;font-size:13px;line-height:1.7;max-width:92%}
+.msg.user{background:var(--blue);color:#fff;align-self:flex-end;border-radius:12px 12px 4px 12px}
+.msg.assistant{background:var(--surface2);color:var(--text);align-self:flex-start;border-radius:12px 12px 12px 4px;border:1px solid var(--border)}
+.msg.loading{color:var(--text3);font-style:italic}
+.ai-input-row{display:flex;gap:8px}
+.ai-input{flex:1;padding:12px 14px;font-size:13px;font-family:'DM Sans',sans-serif;border:1.5px solid var(--border);border-radius:10px;background:var(--surface2);color:var(--text);outline:none;transition:border-color 0.15s}
+.ai-input:focus{border-color:var(--blue)}
+.ai-send{padding:12px 18px;font-size:13px;font-weight:600;border-radius:10px;border:none;background:var(--blue);color:#fff;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap}
+.ai-send:hover{background:#1A5276}
+.ai-send:disabled{opacity:0.5;cursor:default}
 </style>
 </head>
 <body>
@@ -639,6 +655,151 @@ function showEnd(){
         <button class="btn" onclick="showRoleSelect()">Changer de rôle</button>
       </div>
     </div>`;
+}
+
+
+// ===== API CLAUDE =====
+const API_KEY = 'ClyYxEL5xa1X586qYUzfPez8nD1NQMRW';
+let chatHistory = [];
+
+function buildSystemPrompt(){
+  const s = SCENARIOS[G.scenario];
+  const r = ROLES[G.role];
+  const decisions = selectedChoices.map((d,i)=>
+    `Décision ${i+1} : "${d.label}" — Qualité : ${['Mauvaise','Correcte avec réserves','Bonne'][d.qi]}`
+  ).join('\n');
+  return `Tu es un expert en gestion de crise hospitalière et formateur senior. 
+Tu accompagnes un professionnel de santé qui vient de jouer une simulation BlackBox Hospital.
+
+Contexte de la partie :
+- Rôle joué : ${r.name}
+- Scénario : ${s.name}
+- Score obtenu : ${Math.round(
+    (['j1','j2','j3','j4'].reduce((acc,k,i)=>{
+      const v=i===3?100-G[k]:G[k];
+      return acc+v*[0.25,0.35,0.25,0.15][i];
+    },0))
+  )}/100
+
+Décisions prises :
+${decisions}
+
+Ton rôle : répondre aux questions du joueur sur ses décisions, sur les bonnes pratiques hospitalières, sur les procédures réelles. 
+Sois précis, pédagogique, ancré dans la réalité du terrain hospitalier français.
+Réponds en français, de façon directe et professionnelle. Maximum 150 mots par réponse.`;
+}
+
+async function sendMessage(){
+  const input = document.getElementById('ai-input');
+  const btn = document.getElementById('ai-send');
+  const messages = document.getElementById('ai-messages');
+  const text = input.value.trim();
+  if(!text) return;
+
+  // Message utilisateur
+  input.value = '';
+  btn.disabled = true;
+  const userMsg = document.createElement('div');
+  userMsg.className = 'msg user';
+  userMsg.textContent = text;
+  messages.appendChild(userMsg);
+
+  // Message chargement
+  const loadMsg = document.createElement('div');
+  loadMsg.className = 'msg assistant loading';
+  loadMsg.textContent = 'Claude analyse votre question...';
+  messages.appendChild(loadMsg);
+  messages.scrollTop = messages.scrollHeight;
+
+  chatHistory.push({role:'user', content:text});
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': API_KEY,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 300,
+        system: buildSystemPrompt(),
+        messages: chatHistory
+      })
+    });
+    const data = await response.json();
+    const reply = data.content?.[0]?.text || 'Désolé, je n\'ai pas pu répondre.';
+    chatHistory.push({role:'assistant', content:reply});
+    loadMsg.className = 'msg assistant';
+    loadMsg.textContent = reply;
+  } catch(e) {
+    loadMsg.className = 'msg assistant';
+    loadMsg.textContent = 'Erreur de connexion. Vérifiez votre connexion internet.';
+  }
+
+  btn.disabled = false;
+  messages.scrollTop = messages.scrollHeight;
+}
+
+function handleKey(e){
+  if(e.key === 'Enter' && !e.shiftKey){ e.preventDefault(); sendMessage(); }
+}
+
+function showAIChat(){
+  chatHistory = [];
+  const s = SCENARIOS[G.scenario];
+  const zone = document.getElementById('ai-zone');
+  if(!zone) return;
+  zone.innerHTML = `
+    <div class="ai-title"><span class="ai-dot"></span>Tuteur IA — Posez vos questions</div>
+    <div class="ai-messages" id="ai-messages">
+      <div class="msg assistant">Bonjour ! Je connais votre partie — rôle ${ROLES[G.role].name}, scénario "${s.name}". Posez-moi vos questions sur vos décisions ou sur les bonnes pratiques hospitalières.</div>
+    </div>
+    <div class="ai-input-row">
+      <input class="ai-input" id="ai-input" type="text" placeholder="Ex : Pourquoi ma décision 2 était risquée ?" onkeydown="handleKey(event)">
+      <button class="ai-send" id="ai-send" onclick="sendMessage()">Envoyer</button>
+    </div>`;
+}
+
+// ===== SHOWEND avec chat =====
+function showEnd(){
+  const keys=['j1','j2','j3','j4'];
+  const weights=[0.25,0.35,0.25,0.15];
+  let score=0;
+  keys.forEach((k,i)=>{const val=(i===3)?100-G[k]:G[k];score+=clamp(val)*weights[i];});
+  score=Math.round(score);
+  let title,color,verdict,borderColor;
+  if(score>=78){title='Crise maîtrisée';color='var(--green)';borderColor='var(--green-mid)';verdict='Vous avez navigué avec lucidité. Vos décisions ont protégé les patients et le collectif. Ce genre de gestionnaire se fait rare.';}
+  else if(score>=55){title='Gestion acceptable — avec séquelles';color='var(--amber)';borderColor='var(--amber-mid)';verdict='L\'hôpital tient. Mais certaines décisions hésitantes ont laissé des traces. Un rapport d\'incident vous attend ce matin.';}
+  else{title='Incident majeur — enquête ouverte';color='var(--red)';borderColor='var(--red-mid)';verdict='La crise a débordé le cadre. Patients impactés, équipe abimée, hiérarchie en colère. Ce n\'est pas la fin — mais c\'est une cicatrice.';}
+  const qiClass=['bad','mid','good'];
+  const debriefs=selectedChoices.map((d,i)=>`
+    <div class="debrief-block ${qiClass[d.qi]||'mid'}">
+      <div class="debrief-num">Décision ${i+1}</div>
+      <div class="debrief-choice">${d.label.substring(0,60)}${d.label.length>60?'...':''}</div>
+      <div class="debrief-comment">${d.quality}</div>
+    </div>`).join('');
+  const zone=document.getElementById('step-zone');if(!zone)return;
+  zone.innerHTML=`
+    <div class="end-card">
+      <div class="end-title" style="color:${color}">${title}</div>
+      <div class="end-score-wrap">
+        <div class="end-score" style="color:${color}">${score}</div>
+        <div class="end-score-sub">/100</div>
+      </div>
+      <div class="end-verdict" style="border-left-color:${borderColor}">${verdict}</div>
+      <div class="debrief-title">Analyse de vos décisions</div>
+      ${debriefs}
+      <div class="btn-row">
+        <button class="btn primary" onclick="startScenario('${G.scenario}')">Rejouer</button>
+        <button class="btn" onclick="showScenarioSelect()">Autre scénario</button>
+        <button class="btn" onclick="showRoleSelect()">Changer de rôle</button>
+      </div>
+    </div>
+    <div class="ai-zone" id="ai-zone"></div>`;
+  showAIChat();
 }
 
 showRoleSelect();
