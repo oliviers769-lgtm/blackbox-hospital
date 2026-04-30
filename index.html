@@ -659,7 +659,7 @@ function showEnd(){
 
 
 // ===== API CLAUDE =====
-const API_KEY = 'ClyYxEL5xa1X586qYUzfPez8nD1NQMRW';
+const API_KEY = 'hHXxT0amI3Q0xpcwrWvhM8V9dfhRGkiH';
 let chatHistory = [];
 
 function buildSystemPrompt(){
@@ -714,23 +714,20 @@ async function sendMessage(){
   chatHistory.push({role:'user', content:text});
 
   try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
+    const response = await fetch('https://api.mistral.ai/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-api-key': API_KEY,
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-direct-browser-access': 'true'
+        'Authorization': 'Bearer ' + API_KEY
       },
       body: JSON.stringify({
-        model: 'claude-haiku-4-5-20251001',
+        model: 'mistral-small-latest',
         max_tokens: 300,
-        system: buildSystemPrompt(),
-        messages: chatHistory
+        messages: [{role:'system', content:buildSystemPrompt()}, ...chatHistory]
       })
     });
     const data = await response.json();
-    const reply = data.content?.[0]?.text || 'Désolé, je n\'ai pas pu répondre.';
+    const reply = data.choices?.[0]?.message?.content || 'Désolé, je n\'ai pas pu répondre.';
     chatHistory.push({role:'assistant', content:reply});
     loadMsg.className = 'msg assistant';
     loadMsg.textContent = reply;
