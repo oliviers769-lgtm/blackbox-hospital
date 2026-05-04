@@ -40,11 +40,13 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 h1.brand-title,h1{margin:0;padding:0}.brand-title{font-family:'Space Mono',monospace;font-size:clamp(26px,5vw,40px);font-weight:700;color:var(--text);letter-spacing:-0.02em;line-height:1.1;margin-bottom:6px}
 .brand-title span{color:var(--red)}
 .brand-sub{font-size:14px;color:var(--text3);font-weight:400}
-.status-bar{background:var(--text);border-radius:14px;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;box-shadow:var(--shadow-lg)}
+.status-bar{background:linear-gradient(135deg,#1A1D23 0%,#1a2744 50%,#1A1D23 100%);border-radius:14px;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;box-shadow:0 8px 32px rgba(0,0,0,0.25);border:1px solid rgba(255,255,255,0.06);position:relative;overflow:hidden}
+.status-bar::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:2px;background:linear-gradient(90deg,transparent,#E74C3C,#F39C12,#2471A3,transparent);animation:scanline 4s linear infinite}
+@keyframes scanline{0%{left:-100%}100%{left:100%}}
 .status-left{display:flex;flex-direction:column;gap:4px}
-.status-role{font-size:15px;font-weight:700;color:#fff;font-family:'Space Mono',monospace;letter-spacing:0.02em}
-.status-scenario{font-size:11px;color:#8898AA;font-family:'Space Mono',monospace;letter-spacing:0.04em}
-.status-clock{font-family:'Space Mono',monospace;font-size:28px;font-weight:700;color:#E74C3C;letter-spacing:0.05em}
+.status-role{font-size:15px;font-weight:700;color:#fff;font-family:'Space Mono',monospace;letter-spacing:0.02em;transition:color 0.3s}
+.status-scenario{font-size:11px;color:#A8C4E0;font-family:'Space Mono',monospace;letter-spacing:0.04em;opacity:0.85}
+.status-clock{font-family:'Space Mono',monospace;font-size:28px;font-weight:700;background:linear-gradient(135deg,#E74C3C,#F39C12);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:0.05em;filter:drop-shadow(0 0 8px rgba(231,76,60,0.5))}
 .gauges{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:14px}
 @media(min-width:500px){.gauges{grid-template-columns:repeat(4,1fr)}}
 .gauge{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px;box-shadow:var(--shadow)}
@@ -146,6 +148,10 @@ h1.brand-title,h1{margin:0;padding:0}.brand-title{font-family:'Space Mono',monos
 .choice-btn:focus-visible,.btn:focus-visible,.role-card:focus-visible,.scen-card:focus-visible,.ai-send:focus-visible{
   outline:3px solid var(--blue);outline-offset:2px;
 }
+
+.status-bar.idle{background:linear-gradient(135deg,#0d1117 0%,#1a2744 40%,#1a1730 100%)}
+.status-bar.idle .status-role{color:#60d4f7;text-shadow:0 0 20px rgba(96,212,247,0.4)}
+.status-bar.idle .status-scenario{color:#7dd4b8;letter-spacing:0.08em}
 </style>
 </head>
 <body>
@@ -831,12 +837,27 @@ function addLog(lines){
 }
 
 function renderMain(html){document.getElementById('main-zone').innerHTML=html;}
+function setStatusIdle(idle){
+  const bar=document.querySelector('.status-bar');
+  if(bar) bar.classList.toggle('idle',idle);
+}
 
 function showRoleSelect(){
-  G.role=null;G.scenario=null;G.step=0;selectedChoices=[];window._gameActive=false;
-  document.getElementById('role-label').textContent='Choisissez votre rôle';
-  document.getElementById('scen-label').textContent='—';
-  document.getElementById('clock').textContent='--:--';
+  G.role=null;G.scenario=null;G.step=0;selectedChoices=[];window._gameActive=false;setStatusIdle(true);
+  document.getElementById('role-label').textContent='Incident en cours. Choisissez votre rôle.';
+  document.getElementById('scen-label').textContent='BLACKBOX HOSPITAL · SYSTÈME ACTIF';
+  // Horloge temps réel sur l'écran d'accueil
+  if(window._clockInterval) clearInterval(window._clockInterval);
+  function _updateLiveClock(){
+    if(G.scenario) return; // stop si partie en cours
+    const now=new Date();
+    const h=String(now.getHours()).padStart(2,'0');
+    const m=String(now.getMinutes()).padStart(2,'0');
+    const el=document.getElementById('clock');
+    if(el) el.textContent=h+':'+m;
+  }
+  _updateLiveClock();
+  window._clockInterval=setInterval(_updateLiveClock,1000);
   renderMain(`
     <div class="section-title">Votre rôle</div>
     <div class="role-grid">
@@ -896,6 +917,7 @@ function showScenarioSelect(){
 function startScenario(key){
   G.scenario=key;G.j1=80;G.j2=90;G.j3=70;G.j4=35;
   window._gameActive=true;
+  if(window._clockInterval){clearInterval(window._clockInterval);window._clockInterval=null;}setStatusIdle(false);
   const s=SCENARIOS[key];
   G.heure=s.startHeure||4;G.minute=s.startMinute||17;G.step=0;selectedChoices=[];
   currentSteps=s.steps[G.role]||s.steps[Object.keys(s.steps)[0]];
@@ -1144,6 +1166,7 @@ window.showEnd = function(){
   _origShowEnd();
 };
 
+setStatusIdle(true);
 showRoleSelect();
 </script>
 </body>
