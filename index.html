@@ -896,8 +896,8 @@ function showScenarioSelect(){
 function startScenario(key){
   G.scenario=key;G.j1=80;G.j2=90;G.j3=70;G.j4=35;
   window._gameActive=true;
-  G.heure=s.startHeure||4;G.minute=s.startMinute||17;G.step=0;selectedChoices=[];
   const s=SCENARIOS[key];
+  G.heure=s.startHeure||4;G.minute=s.startMinute||17;G.step=0;selectedChoices=[];
   currentSteps=s.steps[G.role]||s.steps[Object.keys(s.steps)[0]];
   document.getElementById('scen-label').textContent=s.name;
   const labels=s.gaugeLabels||['J1','J2','J3','J4'];
