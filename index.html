@@ -1177,6 +1177,58 @@ window.showEnd = function(){
 
 setStatusIdle(true);
 showRoleSelect();
+
+// — AUDIO AMBIANCE —
+const _audio = new Audio('starostin-healthcare-clinic-hospital-doctor-music-261864.mp3');
+_audio.loop = true;
+_audio.volume = 0.35;
+let _audioStarted = false;
+let _muted = false;
+
+function _startAudio(){
+  if(_audioStarted) return;
+  _audioStarted = true;
+  _audio.play().catch(()=>{});
+}
+
+document.addEventListener('click', _startAudio, {once:true});
+document.addEventListener('keydown', _startAudio, {once:true});
+
+const _muteBtn = document.createElement('button');
+_muteBtn.id = 'mute-btn';
+_muteBtn.setAttribute('aria-label','Couper/activer la musique');
+_muteBtn.innerHTML = '🔊';
+_muteBtn.onclick = function(e){
+  e.stopPropagation();
+  _startAudio();
+  _muted = !_muted;
+  _audio.muted = _muted;
+  _muteBtn.innerHTML = _muted ? '🔇' : '🔊';
+};
+document.body.appendChild(_muteBtn);
+
 </script>
+<style>
+#mute-btn {
+  position: fixed;
+  bottom: 18px;
+  right: 18px;
+  z-index: 9999;
+  background: #1A1D23;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+#mute-btn:hover { background: #2471A3; }
+</style>
 </body>
 </html>
